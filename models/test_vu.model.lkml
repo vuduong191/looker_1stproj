@@ -126,9 +126,15 @@ explore: order_line {
     relationship: many_to_one
     sql_on: ${order_line.product_id}=${product.id} ;;
   }
+  join: inventory_week_active {
+    relationship: many_to_one
+    sql_on: ${order.created_week} = ${inventory_week_active.snapshot_week}
+    AND ${order_line.sku} = ${inventory_week_active.sku};;
+  }
 }
 explore: person {}
 explore: inventory_level {
+  hidden: yes
   join: product_variant {
     relationship: many_to_one
     sql_on: ${product_variant.inventory_item_id}=${inventory_level.inventory_item_id} ;;
@@ -153,5 +159,14 @@ explore: inventory_insert {
 explore: inventory_insert_native {
   hidden: yes
 }
-explore: inventory_snapshot {}
+explore: inventory_snapshot {
+  join: product_variant {
+    relationship: many_to_one
+    sql_on: ${inventory_snapshot.inventory_item_id} = ${product_variant.inventory_item_id} ;;
+  }
+  join: product {
+    relationship: many_to_one
+    sql_on: ${product_variant.product_id} = ${product.id} ;;
+  }
+}
 explore: avg_spent_by_state {}

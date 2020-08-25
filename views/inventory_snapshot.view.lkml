@@ -2,6 +2,11 @@ view: inventory_snapshot {
   sql_table_name: `aerobic-datum-283623.looker_scratch.inventory_snapshot`
     ;;
 
+  dimension: pk {
+    hidden: yes
+    sql: ${inventory_item_id} || ${snapshot_date} ;;
+  }
+
   dimension: inventory_item_id {
     type: number
     sql: ${TABLE}.inventory_item_id ;;
@@ -45,5 +50,13 @@ view: inventory_snapshot {
   measure: count {
     type: count
     drill_fields: []
+  }
+  measure: count_of_active_item_days {
+    type: count
+    filters: [inventory_quantity: ">0"]
+  }
+  measure: count_of_inactive_item_days {
+    type: count
+    filters: [inventory_quantity: "<=0"]
   }
 }
