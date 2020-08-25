@@ -147,6 +147,11 @@ explore: product_variant {
     sql_on: ${product_variant.sku}=${vu_product_data_us.product_variant_sku} ;;
   }
 }
-explore: inventory_insert {}
-explore: inventory_insert_native {}
+explore: inventory_insert {
+  hidden: yes
+}
+explore: inventory_insert_native {
+  hidden: yes
+}
+explore: inventory_snapshot {}
 explore: avg_spent_by_state {}
