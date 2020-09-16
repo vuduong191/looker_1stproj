@@ -148,13 +148,18 @@ explore: order_line {
   join: customer {
     relationship: many_to_one
     sql_on: ${customer.id} = ${order.customer_id} ;;
-    fields: [count, created_date, created_month, tax_exempt, customer.verified_email,
-      state, orders_count, customer.accepts_marketing]
+    fields: [id, count, created_date, created_month, tax_exempt, customer.verified_email,
+      state, orders_count, accepts_marketing, percent_returning, is_returning_customer]
   }
   join: order_customer_dimensions {
     view_label: "Order"
     relationship: one_to_one
     sql:   ;;
+  }
+  join: first_order_product_types {
+    relationship: many_to_one
+    view_label: "Customer"
+    sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;
   }
 }
 explore: person {}

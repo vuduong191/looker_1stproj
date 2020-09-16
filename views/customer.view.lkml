@@ -56,6 +56,12 @@ view: customer {
     sql: ${TABLE}.orders_count ;;
   }
 
+  dimension: is_returning_customer {
+    label: "Is Return Customer"
+    type: yesno
+    sql: ${orders_count} > 1 ;;
+  }
+
   dimension: phone {
     type: string
     sql: ${TABLE}.phone ;;
@@ -99,6 +105,7 @@ view: customer {
   measure: count {
     type: count
     drill_fields: [id, last_name, first_name]
+    filters: [id: "NOT NULL"]
   }
   measure: sum_of_total_spent {
     type: sum
@@ -118,5 +125,18 @@ view: customer {
     value_format_name: "percent_0"
     sql: ${sum_of_total_spent_acceptemail}/NULLIF(${sum_of_total_spent},0) ;;
     drill_fields: [id, last_name, first_name]
+  }
+
+  measure: returning_count {
+    type: count
+    filters: [id: "NOT NULL", is_returning_customer: "Yes"]
+    hidden: yes
+  }
+
+  measure: percent_returning {
+    type: number
+    description: "The percentage of returning customers"
+    value_format_name: percent_1
+    sql: ${returning_count}/nullif(${count},0) ;;
   }
 }
