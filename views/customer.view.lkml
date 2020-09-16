@@ -5,22 +5,9 @@ view: customer {
 
   dimension: id {
     primary_key: yes
+    hidden: yes
     type: number
     sql: ${TABLE}.id ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}._fivetran_synced ;;
   }
 
   dimension: accepts_marketing {
@@ -43,6 +30,7 @@ view: customer {
   }
 
   dimension: default_address_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.default_address_id ;;
   }
@@ -90,6 +78,7 @@ view: customer {
 
   dimension_group: updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,

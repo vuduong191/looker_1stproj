@@ -6,32 +6,13 @@ view: product {
   dimension: id {
     primary_key: yes
     type: number
+    hidden: yes
     sql: ${TABLE}.id ;;
-  }
-
-  dimension: _fivetran_deleted {
-    type: yesno
-    hidden: yes
-    sql: ${TABLE}._fivetran_deleted ;;
-  }
-
-  dimension_group: _fivetran_synced {
-    type: time
-    hidden: yes
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}._fivetran_synced ;;
   }
 
   dimension_group: created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -56,6 +37,7 @@ view: product {
   }
 
   dimension_group: published {
+    label: "Product Published"
     type: time
     timeframes: [
       raw,
@@ -103,7 +85,10 @@ view: product {
   }
 
   measure: count {
-    type: count
-    drill_fields: [id]
+    label: "Number of Products"
+    sql: ${id} ;;
+    type: count_distinct
+    drill_fields: [id, title, product_type]
+    filters: [id: "Not Null"]
   }
 }

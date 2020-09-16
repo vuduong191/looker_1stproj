@@ -118,11 +118,25 @@ explore: order_line {
   join: order {
     type: left_outer
     relationship: many_to_one
-    view_label: "Order Line"
-    fields: [order.created_date, order.created_week]
+    view_label: "Order"
+    fields: [order.created_date, order.created_week, sum_of_sales]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
+  join: order_tag {
+    view_label: "Order Line"
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${order_line.order_id} = ${order_tag.pk2_order_id} ;;
+    fields: [value, marketing_tag_integer, sum_marketing_tag_integer]
+  }
+  join: order_is_marketing {
+    view_label: "Order Line"
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${order_line.id} = ${order_is_marketing.id} ;;
+  }
   join: product {
+    view_label: "Order Line"
     relationship: many_to_one
     sql_on: ${order_line.product_id}=${product.id} ;;
   }
@@ -130,6 +144,17 @@ explore: order_line {
     relationship: many_to_one
     sql_on: ${order.created_week} = ${inventory_week_active.snapshot_week}
     AND ${order_line.sku} = ${inventory_week_active.sku};;
+  }
+  join: customer {
+    relationship: many_to_one
+    sql_on: ${customer.id} = ${order.customer_id} ;;
+    fields: [count, created_date, created_month, tax_exempt, customer.verified_email,
+      state, orders_count, customer.accepts_marketing]
+  }
+  join: order_customer_dimensions {
+    view_label: "Order"
+    relationship: one_to_one
+    sql:   ;;
   }
 }
 explore: person {}
