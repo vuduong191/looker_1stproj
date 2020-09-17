@@ -6,7 +6,7 @@ view: order {
   dimension: id {
     primary_key: yes
     type: number
-    hidden: yes
+#     hidden: yes
     sql: ${TABLE}.id ;;
   }
 
@@ -221,6 +221,10 @@ view: order {
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+    link: {
+      label: "View Shopify Order"
+      url: "https://ettitudeusa.myshopify.com/admin/orders/{{ id._value | url_encode }}?orderListBeta=true"
+    }
   }
 
   dimension: note {

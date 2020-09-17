@@ -21,6 +21,7 @@ view: order_tag {
   }
 
   dimension: value {
+    label: "Order Tag Value"
     type: string
     hidden: yes
     sql: ${TABLE}.value ;;
