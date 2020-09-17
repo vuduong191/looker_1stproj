@@ -6,7 +6,7 @@ view: order_line {
   dimension: id {
     primary_key: yes
     type: number
-#     hidden: yes
+    hidden: yes
     sql: ${TABLE}.id ;;
   }
 
@@ -39,6 +39,7 @@ view: order_line {
   }
 
   dimension: index {
+    description: "The line number within a cart."
     type: number
     sql: ${TABLE}.index ;;
   }
@@ -243,4 +244,17 @@ view: order_line {
     value_format_name: decimal_0
     sql: ${quantity} ;;
   }
+  measure: total_price {
+    type: sum_distinct
+    sql_distinct_key: ${id} ;;
+    value_format_name: usd
+    sql: ${price}*${quantity} ;;
+  }
+  measure: total_pre_tax_price {
+    type: sum_distinct
+    sql_distinct_key: ${id} ;;
+    value_format_name: usd
+    sql: ${pre_tax_price}*${quantity} ;;
+  }
+
 }

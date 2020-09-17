@@ -5,16 +5,19 @@ view: order_is_marketing {
       column: id {}
     }
   }
+  dimension: id {
+    type: number
+    hidden: yes
+    primary_key: yes
+  }
   dimension: sum_marketing_tag_integer {
     label: "Order Line Sum Marketing Tag Integer"
     type: number
     hidden: yes
   }
-  dimension: id {
-    type: number
-    hidden: yes
-  }
+
   dimension: is_marketing {
+    description: "Indicates if the order is a marketing order"
     type: yesno
     sql: ${sum_marketing_tag_integer}>0 ;;
   }

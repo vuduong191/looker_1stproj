@@ -58,6 +58,7 @@ view: customer {
 
   dimension: is_returning_customer {
     label: "Is Return Customer"
+    description: "Indicates if the customer had more than 1 order."
     type: yesno
     sql: ${orders_count} > 1 ;;
   }
@@ -103,7 +104,9 @@ view: customer {
   }
 
   measure: count {
-    type: count
+    label: "Number of Customers"
+    type: count_distinct
+    sql: ${id} ;;
     drill_fields: [id, last_name, first_name]
     filters: [id: "NOT NULL"]
   }
@@ -123,11 +126,14 @@ view: customer {
   measure: prc_acc {
     type: number
     value_format_name: "percent_0"
+    description: "The percent of customers who accept mail."
     sql: ${sum_of_total_spent_acceptemail}/NULLIF(${sum_of_total_spent},0) ;;
     drill_fields: [id, last_name, first_name]
   }
 
   measure: returning_count {
+    label: "Number of Returning Customers"
+    description: "The number of returning customers."
     type: count
     filters: [id: "NOT NULL", is_returning_customer: "Yes"]
     hidden: yes
