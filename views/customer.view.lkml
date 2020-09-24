@@ -1,7 +1,7 @@
 view: customer {
   sql_table_name: `aerobic-datum-283623.shopify.customer`
     ;;
-  drill_fields: [id]
+  drill_fields: [id, created_date]
 
   dimension: id {
     primary_key: yes
@@ -111,7 +111,8 @@ view: customer {
     filters: [id: "NOT NULL"]
   }
   measure: sum_of_total_spent {
-    type: sum
+    type: sum_distinct
+    sql_distinct_key: ${id} ;;
     value_format_name: "usd"
     sql: ${total_spent} ;;
     drill_fields: [id, last_name, first_name]
@@ -144,5 +145,13 @@ view: customer {
     description: "The percentage of returning customers"
     value_format_name: percent_1
     sql: ${returning_count}/nullif(${count},0) ;;
+  }
+
+  measure: average_actual_ltv {
+    type: number
+    label: "Average Actual LTV"
+    description: "The average lifetime value of customers, based on actual past orders"
+    sql: ${sum_of_total_spent}/${count} ;;
+    value_format_name: usd
   }
 }

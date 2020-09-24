@@ -119,7 +119,7 @@ explore: order_line {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_week, sum_of_sales]
+    fields: [order.created_date, order.created_week, sum_of_sales, id, name, order.count]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
   join: order_tag {
@@ -148,8 +148,8 @@ explore: order_line {
   join: customer {
     relationship: many_to_one
     sql_on: ${customer.id} = ${order.customer_id} ;;
-    fields: [id, count, created_date, created_month, tax_exempt, customer.verified_email,
-      state, orders_count, accepts_marketing, percent_returning, is_returning_customer]
+    fields: [id, count, first_name, last_name, created_date, created_month, tax_exempt, verified_email,
+      state, orders_count, accepts_marketing, percent_returning, is_returning_customer, average_actual_ltv]
   }
   join: order_customer_dimensions {
     view_label: "Order"

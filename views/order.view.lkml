@@ -6,7 +6,7 @@ view: order {
   dimension: id {
     primary_key: yes
     type: number
-#     hidden: yes
+    hidden: yes
     sql: ${TABLE}.id ;;
   }
 

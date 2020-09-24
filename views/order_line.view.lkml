@@ -1,7 +1,7 @@
 view: order_line {
   sql_table_name: `aerobic-datum-283623.shopify.order_line`
     ;;
-  drill_fields: [id]
+  drill_fields: [id, order.name, price, order_id]
 
   dimension: id {
     primary_key: yes
