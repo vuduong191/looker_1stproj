@@ -427,6 +427,12 @@ view: order {
     sql: ${TABLE}.user_id ;;
   }
 
+  measure: min_order_id {
+    type: min
+    hidden: yes
+    sql: ${id} ;;
+  }
+
   measure: count {
     label: "Number of Orders"
     type: count

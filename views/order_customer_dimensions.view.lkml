@@ -3,12 +3,12 @@ view: order_customer_dimensions {
     description: "The time between when a user first ordered and the current order."
     type: duration_day
     sql_start: ${customer.created_raw} ;;
-    sql_end: ${order.created_raw} ;;
+    sql_end: ${customer_first_order.first_order_raw} ;;
   }
 
   dimension: months_since_first_order {
     type:  number
-    sql: ceiling(${days_since_created}/30);;
+    sql: floor(${days_since_created}/30);;
     drill_fields: [order.id, order.name]
   }
 

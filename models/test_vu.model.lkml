@@ -114,14 +114,16 @@ explore: metric {
     relationship: many_to_one
   }
 }
+
 explore: order_line {
   join: order {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_week, sum_of_sales, id, name, order.count]
+    fields: [order.created_date, order.created_week, sum_of_sales, id, name, count, min_order_id]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
+
   join: order_tag {
     view_label: "Order Line"
     type: left_outer
@@ -151,6 +153,13 @@ explore: order_line {
     fields: [id, count, first_name, last_name, created_date, created_month, tax_exempt, verified_email,
       state, orders_count, accepts_marketing, percent_returning, is_returning_customer, average_actual_ltv]
   }
+
+# This view adds only one additional field; the first order date!
+  join: customer_first_order {
+    relationship: many_to_one
+    sql_on: ${order.id} = ${customer_first_order.min_order_id} ;;
+  }
+# This view adds important dimensions like the number of days since the first order
   join: order_customer_dimensions {
     view_label: "Order"
     relationship: one_to_one
