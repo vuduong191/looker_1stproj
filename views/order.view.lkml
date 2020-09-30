@@ -209,6 +209,7 @@ view: order {
 
   dimension: landing_site_base_url {
     type: string
+    hidden: yes
     sql: ${TABLE}.landing_site_base_url ;;
   }
 
@@ -234,6 +235,7 @@ view: order {
 
   dimension: number {
     type: number
+    hidden: yes
     sql: ${TABLE}.number ;;
   }
 
@@ -263,6 +265,7 @@ view: order {
   }
 
   dimension: referring_site {
+    hidden: yes
     type: string
     sql: ${TABLE}.referring_site ;;
   }
@@ -393,6 +396,7 @@ view: order {
   }
 
   dimension: total_price {
+    label: "Total Sale"
     type: number
     sql: ${TABLE}.total_price ;;
   }
@@ -403,6 +407,7 @@ view: order {
   }
 
   dimension: total_weight {
+    hidden: yes
     type: number
     sql: ${TABLE}.total_weight ;;
   }
@@ -449,6 +454,7 @@ view: order {
   set: detail {
     fields: [
       id,
+      created_date,
       shipping_address_first_name,
       name,
       shipping_address_name,

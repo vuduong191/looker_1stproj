@@ -120,7 +120,7 @@ explore: order_line {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_week, sum_of_sales, id, name, count, min_order_id]
+    fields: [order.created_date, order.created_week, order.is_cancelled, sum_of_sales, id, name, count, min_order_id]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
 
@@ -129,7 +129,7 @@ explore: order_line {
     type: left_outer
     relationship: one_to_many
     sql_on: ${order_line.order_id} = ${order_tag.pk2_order_id} ;;
-    fields: [value, marketing_tag_integer, sum_marketing_tag_integer]
+    fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
   }
   join: order_is_marketing {
     view_label: "Order Line"
@@ -137,10 +137,22 @@ explore: order_line {
     relationship: one_to_one
     sql_on: ${order_line.id} = ${order_is_marketing.id} ;;
   }
+  join: order_is_b2b {
+    view_label: "Order Line"
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${order_line.id} = ${order_is_b2b.id} ;;
+  }
   join: product {
     view_label: "Order Line"
     relationship: many_to_one
     sql_on: ${order_line.product_id}=${product.id} ;;
+  }
+  join: vu_product_data_us {
+    type: left_outer
+    view_label: "Manual Data"
+    relationship: many_to_one
+    sql_on: ${order_line.sku}=${vu_product_data_us.product_variant_sku} ;;
   }
   join: inventory_week_active {
     relationship: many_to_one
@@ -209,3 +221,7 @@ explore: inventory_snapshot {
   }
 }
 explore: avg_spent_by_state {}
+explore: weekly_average_sales_by_sku {}
+explore: order_shipping_line {}
+explore: order_tag {}
+explore: order_is_b2b {}

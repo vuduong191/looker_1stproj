@@ -23,7 +23,7 @@ view: order_tag {
   dimension: value {
     label: "Order Tag Value"
     type: string
-    hidden: yes
+#     hidden: yes
     sql: ${TABLE}.value ;;
   }
 
@@ -34,10 +34,29 @@ view: order_tag {
             ('Samples','B2B Sample','Media Sample','Partnership','Giveaway','Influence','Investor')
             THEN 1 ELSE 0 END;;
   }
-
+  dimension: b2b_tag_integer {
+    type: number
+    sql: if ( lower(value) LIKE '%b2b%'
+        OR lower(value) LIKE '%wholesale%'
+        OR lower(value) LIKE '%warehouse%'
+        OR lower(value) LIKE '%made trade%'
+        OR lower(value) LIKE '%ourcommonplace%'
+        OR lower(value) LIKE '%carro%'
+        OR lower(value) LIKE '%bespoke%'
+        OR lower(value) LIKE '%donegood%'
+        OR lower(value) LIKE '%dropship%', 1, 0);;
+#     hidden: yes
+#     sql: CASE WHEN lower(value) LIKE '%b2b%'
+#       THEN 1 ELSE 0 END;;
+  }
   measure: sum_marketing_tag_integer {
     type: sum
     hidden: yes
     sql: ${marketing_tag_integer} ;;
+  }
+  measure: sum_b2b_tag_integer {
+    type: sum
+#     hidden: yes
+    sql: ${b2b_tag_integer} ;;
   }
 }
