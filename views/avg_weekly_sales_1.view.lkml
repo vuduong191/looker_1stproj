@@ -1,4 +1,4 @@
-view: weekly_average_sales_by_sku {
+view: avg_weekly_sales_1 {
     derived_table: {
       explore_source: order_line {
         column: sku {}
@@ -11,27 +11,21 @@ view: weekly_average_sales_by_sku {
         column: material { field: vu_product_data_us.material }
         column: product { field: vu_product_data_us.product }
         column: size { field: vu_product_data_us.size }
+        filters: [
+          inventory_week_active.is_inactive : "No",
+          order_is_marketing.is_marketing: "No",
+          order.is_cancelled : "No",
+          order_is_b2b.is_b2b : "No"
+        ]
         filters: {
-          field: inventory_week_active.is_inactive
-          value: "No"
-        }
-        filters: {
-          field: order_is_marketing.is_marketing
-          value: "No"
-        }
-        filters: {
-          field: order.is_cancelled
-          value: "No"
+          field: order.source_name
+          value: "web,580111"
         }
       }
     }
     dimension: sku {}
     dimension: created_week {
       type: date_week
-    }
-    dimension: is_cancelled {
-      label: "Order Is Cancelled (Yes / No)"
-      type: yesno
     }
     dimension: sum {
       label: "Order Line Total Unit Sold"
@@ -66,5 +60,10 @@ view: weekly_average_sales_by_sku {
       type: average
       value_format:"$0.00"
       sql: ${total_price} ;;
+    }
+    measure: active_week_count {
+      type: count_distinct
+      value_format:"0"
+      sql: ${created_week} ;;
     }
   }

@@ -120,7 +120,7 @@ explore: order_line {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_week, order.is_cancelled, sum_of_sales, id, name, count, min_order_id]
+    fields: [order.created_date, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
 
@@ -221,7 +221,8 @@ explore: inventory_snapshot {
   }
 }
 explore: avg_spent_by_state {}
-explore: weekly_average_sales_by_sku {}
+explore: avg_weekly_sales_2 {}
+explore: avg_weekly_sales_1 {}
 explore: order_shipping_line {}
 explore: order_tag {}
 explore: order_is_b2b {}
