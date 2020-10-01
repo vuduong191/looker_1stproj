@@ -3,15 +3,14 @@ view: avg_weekly_sales_1 {
       explore_source: order_line {
         column: sku {}
         column: created_week { field: order.created_week }
-        column: is_cancelled {field: order.is_cancelled}
-        column: sum {}
-        column: total_price {}
         column: category { field: vu_product_data_us.category }
         column: color { field: vu_product_data_us.color }
         column: material { field: vu_product_data_us.material }
         column: product { field: vu_product_data_us.product }
         column: size { field: vu_product_data_us.size }
-        filters: [
+        column: number_sold { field: order_line.total_units_sold}
+        column: total_price {}
+          filters: [
           inventory_week_active.is_inactive : "No",
           order_is_marketing.is_marketing: "No",
           order.is_cancelled : "No",
@@ -22,15 +21,22 @@ view: avg_weekly_sales_1 {
           value: "web,580111"
         }
       }
+      persist_for: "12 hours"
+    }
+    dimension: pk {
+      primary_key: yes
+      hidden: yes
+      sql: ${sku} || cast (${created_week} as string) ;;
     }
     dimension: sku {}
     dimension: created_week {
       type: date_week
     }
-    dimension: sum {
+    dimension: number_sold {
       label: "Order Line Total Unit Sold"
       value_format: "#,##0"
       type: number
+      sql: ${TABLE}.number_sold ;;
     }
     dimension: total_price {
       value_format: "$#,##0.00"
@@ -54,7 +60,7 @@ view: avg_weekly_sales_1 {
     measure: avg_weekly_units_sold {
       type: average
       value_format: "0.00"
-      sql: ${sum} ;;
+      sql: ${number_sold} ;;
     }
     measure: avg_weekly_sales {
       type: average
@@ -66,4 +72,10 @@ view: avg_weekly_sales_1 {
       value_format:"0"
       sql: ${created_week} ;;
     }
+  measure: sku_count {
+    type: count_distinct
+    value_format_name: decimal_0
+    sql: ${sku} ;;
+  }
+
   }

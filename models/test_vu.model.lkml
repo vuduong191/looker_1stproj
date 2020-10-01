@@ -203,6 +203,26 @@ explore: product_variant {
     relationship: many_to_one
     sql_on: ${product_variant.sku}=${vu_product_data_us.product_variant_sku} ;;
   }
+  join: weeks {
+    type: cross
+    relationship: many_to_many
+  }
+  join: avg_weekly_sales_1 {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${product_variant.sku} = ${avg_weekly_sales_1.sku} ;;
+  }
+  join: avg_weekly_sales_by_category {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vu_product_data_us.category} = ${avg_weekly_sales_by_category.category} AND
+    ${weeks.created_week} = ${avg_weekly_sales_by_category.created_week}
+    ;;
+  }
+  join: avg_weekly_sales_derived {
+    relationship: one_to_one
+    sql:   ;;
+  }
 }
 explore: inventory_insert {
   hidden: yes

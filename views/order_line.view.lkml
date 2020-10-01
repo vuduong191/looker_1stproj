@@ -237,7 +237,7 @@ view: order_line {
     drill_fields: [id, property_discount_name, name]
     filters: [id: "NOT NULL"]
   }
-  measure: sum {
+  measure: total_units_sold {
     type: sum_distinct
     sql_distinct_key: ${id} ;;
     label: "Total Unit Sold"
