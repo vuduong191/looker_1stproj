@@ -203,6 +203,12 @@ explore: product_variant {
     relationship: many_to_one
     sql_on: ${product_variant.sku}=${vu_product_data_us.product_variant_sku} ;;
   }
+  join: avg_weekly_sales_2 {
+    type: left_outer
+    relationship: many_to_one
+    view_label: "L12W Data"
+    sql_on: ${product_variant.sku}=${avg_weekly_sales_2.sku} ;;
+  }
 }
 explore: inventory_insert {
   hidden: yes
@@ -222,7 +228,16 @@ explore: inventory_snapshot {
 }
 explore: avg_spent_by_state {}
 explore: avg_weekly_sales_2 {}
-explore: avg_weekly_sales_1 {}
+explore: avg_weekly_sales_1 {
+  join: avg_weekly_sales_2 {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${avg_weekly_sales_1.sku}=${avg_weekly_sales_2.sku} ;;
+    fields: [avg_weekly_sales_2.rank_group_l12w]
+    view_label: "L12W Data"
+  }
+}
 explore: order_shipping_line {}
 explore: order_tag {}
 explore: order_is_b2b {}
+explore: woh {}
