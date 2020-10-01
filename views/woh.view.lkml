@@ -10,6 +10,7 @@ view: woh {
         column: size { field: vu_product_data_us.size }
         column: rank_group_l12w { field: avg_weekly_sales_2.rank_group_l12w }
         column: avg_weekly_units_sold { field: avg_weekly_sales_2.avg_weekly_units_sold }
+        column: avg_weekly_sales { field: avg_weekly_sales_2.avg_weekly_sales }
         column: active_week_count { field: avg_weekly_sales_2.active_week_count }
         derived_column: woh {
           sql:  inventory_quantity / NULLIF(avg_weekly_units_sold, 0)  ;;
@@ -37,6 +38,11 @@ view: woh {
     }
     dimension: color {
       label: "Color"
+    }
+    dimension: avg_weekly_sales {
+      label: "Avg Weekly Sales"
+      value_format: "0.00"
+      type: number
     }
     dimension: material {
       label: "Material"
