@@ -2,7 +2,12 @@ view: inventory_insert {
   derived_table: {
     datagroup_trigger: daily_datagroup
     create_process: {
-      sql_step: INSERT INTO looker_scratch.inventory_snapshot SELECT
+      sql_step:
+        with max_date as (
+          select max(snapshot_date) as max_date from looker_scratch.inventory_snapshot
+        )
+
+      INSERT INTO looker_scratch.inventory_snapshot SELECT
         product_variant.inventory_item_id  AS inventory_item_id,
         product_variant.inventory_quantity  AS inventory_quantity,
         product_variant.product_id  AS product_id,
@@ -11,7 +16,8 @@ view: inventory_insert {
         CURRENT_DATE AS snapshot_date,
       FROM `aerobic-datum-283623.shopify.product_variant`
           AS product_variant
-
+      inner join max_date on 1=1
+      where CURRENT_DATE > max_date.max_date
       GROUP BY 1,2,3,4,5 ;;
     }
   }

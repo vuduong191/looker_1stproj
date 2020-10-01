@@ -9,7 +9,7 @@ datagroup: test_vu_default_datagroup {
 }
 datagroup: daily_datagroup {
   sql_trigger:   SELECT cast(CURRENT_DATE as string); ;;
-  max_cache_age: "24 hours"
+  max_cache_age: "25 hours"
 }
 
 persist_with: test_vu_default_datagroup
