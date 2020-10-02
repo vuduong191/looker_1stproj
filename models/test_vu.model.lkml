@@ -234,6 +234,10 @@ explore: product_variant {
 explore: inventory_insert {
   hidden: yes
 }
+explore: inventory_insert_2_vu {
+  hidden: yes
+}
+
 explore: inventory_insert_native {
   hidden: yes
 }
