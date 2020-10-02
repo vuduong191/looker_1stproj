@@ -7,7 +7,7 @@ view: inventory_insert_2_vu {
           product_variant.sku  AS product_variant_sku,
           CURRENT_DATE AS day,
           product_variant.inventory_quantity  AS inventory_quantity
-        FROM `aerobic-datum-283623.shopify_au.product_variant` AS product_variant;;
+        FROM `aerobic-datum-283623.shopify.product_variant` AS product_variant;;
       }
     }
     dimension: inventory_quantity {
