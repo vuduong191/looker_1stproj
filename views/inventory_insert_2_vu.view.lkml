@@ -1,6 +1,6 @@
 view: inventory_insert_2_vu {
     derived_table: {
-      sql_trigger_value: SELECT EXTRACT(DATE FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL 5 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
+      sql_trigger_value: SELECT EXTRACT(DATE FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL 10 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
       create_process: {
         sql_step:
         INSERT INTO looker_scratch.inventory_snapshot_us SELECT
