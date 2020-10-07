@@ -266,4 +266,10 @@ explore: order_shipping_line {}
 explore: order_tag {}
 explore: order_is_b2b {}
 explore: woh {}
-explore: affiliate_daily_performance_us {}
+explore: affiliate_daily_performance_us {
+  join: affiliate_performance_measures {
+    view_label: "Affiliate Metrics"
+    relationship: one_to_one
+    sql:   ;;
+}
+}

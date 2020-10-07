@@ -20,36 +20,38 @@ view: affiliate_daily_performance_us {
     sql: ${TABLE}.transaction_date ;;
   }
 
-  dimension: impressions {
-    type: number
+  measure: impressions {
+    type: sum
+    description: "Sum of impressions"
     sql: ${TABLE}.of_impressions ;;
   }
-  dimension: clicks {
-    type: number
+  measure: clicks {
+    type: sum
+    description: "Sum of clicks"
     sql: ${TABLE}.of_clicks ;;
   }
-  dimension: orders {
-    type: number
+  measure: orders {
+    type: sum
     sql: ${TABLE}.of_orders ;;
   }
-  dimension: items {
-    type: number
+  measure: items {
+    type: sum
     sql: ${TABLE}.of_items ;;
   }
-  dimension: cancelled_items {
-    type: number
+  measure: cancelled_items {
+    type: sum
     sql: ${TABLE}.of_cancelled_items ;;
   }
-  dimension: net_items {
-    type: number
+  measure: net_items {
+    type: sum
     sql: ${TABLE}.of_net_items ;;
   }
-  dimension: sales {
-    type: number
+  measure: sales {
+    type: sum
     sql: ${TABLE}.sales ;;
   }
-  dimension: total_commission {
-    type: number
+  measure: total_commission {
+    type: sum
     sql: ${TABLE}.total_commission ;;
   }
 }
