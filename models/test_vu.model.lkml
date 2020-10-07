@@ -266,3 +266,4 @@ explore: order_shipping_line {}
 explore: order_tag {}
 explore: order_is_b2b {}
 explore: woh {}
+explore: affiliate_daily_performance_us {}
