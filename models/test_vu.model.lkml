@@ -271,5 +271,21 @@ explore: affiliate_daily_performance_us {
     view_label: "Affiliate Metrics"
     relationship: one_to_one
     sql:   ;;
+  }
 }
+explore: ga_channel_performance_us {}
+explore: ga_channel_us {
+  join: ga_us_channel_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
+  }
+}
+explore: bing_daily_us {}
+explore: cac_us {
+  join: bing_daily_us {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${bing_daily_us.date_date} = ${cac_us.date_date} ;;
+  }
 }

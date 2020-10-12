@@ -19,7 +19,23 @@ view: affiliate_daily_performance_us {
     datatype: date
     sql: ${TABLE}.transaction_date ;;
   }
-
+  parameter: timeframe_picker {
+    label: "Date Granularity"
+    type: string
+    allowed_value: { value: "Date" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    default_value: "Date"
+  }
+  dimension: dynamic_timeframe {
+    type: string
+    sql:
+    CASE
+    WHEN {% parameter timeframe_picker %} = 'Date' THEN CAST(transaction_date AS STRING)
+    WHEN {% parameter timeframe_picker %} = 'Week' THEN CAST(DATE_TRUNC(${TABLE}.transaction_date, WEEK) AS STRING)
+    WHEN{% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(${TABLE}.transaction_date, MONTH) AS STRING)
+    END ;;
+  }
   measure: impressions {
     type: sum
     description: "Sum of impressions"

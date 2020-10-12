@@ -1,5 +1,5 @@
-view: ga_us {
-  sql_table_name: `aerobic-datum-283623.google_analytics.ga_us`
+view: ga_channel_performance_us {
+  sql_table_name: `aerobic-datum-283623.google_analytics.ga_channel_performance_us`
     ;;
 
   dimension: _fivetran_id {
@@ -9,6 +9,7 @@ view: ga_us {
 
   dimension_group: _fivetran_synced {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -19,6 +20,16 @@ view: ga_us {
       year
     ]
     sql: ${TABLE}._fivetran_synced ;;
+  }
+
+  dimension: bounces {
+    type: number
+    sql: ${TABLE}.bounces ;;
+  }
+
+  dimension: channel_grouping {
+    type: string
+    sql: ${TABLE}.channel_grouping ;;
   }
 
   dimension_group: date {
@@ -36,9 +47,24 @@ view: ga_us {
     sql: ${TABLE}.date ;;
   }
 
+  dimension: new_users {
+    type: number
+    sql: ${TABLE}.new_users ;;
+  }
+
+  dimension: pageviews {
+    type: number
+    sql: ${TABLE}.pageviews ;;
+  }
+
   dimension: profile {
     type: string
     sql: ${TABLE}.profile ;;
+  }
+
+  dimension: session_duration {
+    type: number
+    sql: ${TABLE}.session_duration ;;
   }
 
   dimension: sessions {
@@ -54,6 +80,16 @@ view: ga_us {
   dimension: transactions {
     type: number
     sql: ${TABLE}.transactions ;;
+  }
+
+  dimension: unique_pageviews {
+    type: number
+    sql: ${TABLE}.unique_pageviews ;;
+  }
+
+  dimension: users {
+    type: number
+    sql: ${TABLE}.users ;;
   }
 
   measure: count {
