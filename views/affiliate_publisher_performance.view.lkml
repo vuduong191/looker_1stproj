@@ -35,25 +35,25 @@ view: affiliate_publisher_performance {
         WHEN{% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(${TABLE}.transaction_date, MONTH) AS STRING)
         END ;;
   }
-  dimension_group: pub_id {
+  dimension: pub_id {
     sql: ${TABLE}.publisher_id ;;
   }
-  dimension_group: market {
+  dimension: market {
     sql: ${TABLE}.market ;;
   }
-  dimension_group: pub_name {
+  dimension: pub_name {
     sql: ${TABLE}.publisher_name ;;
   }
-  dimension_group: offer_id {
+  dimension: offer_id {
     sql: ${TABLE}.offer_id ;;
   }
-  dimension_group: offer_name {
+  dimension: offer_name {
     sql: ${TABLE}.offer_name ;;
   }
-  dimension_group: link_id {
+  dimension: link_id {
     sql: ${TABLE}.link_id ;;
   }
-  dimension_group: link_name {
+  dimension: link_name {
     sql: ${TABLE}.link_name ;;
   }
   measure: clicks {

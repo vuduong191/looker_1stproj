@@ -291,11 +291,21 @@ explore: cac_us {
   }
 }
 explore: affiliate_publisher_performance {
+  join: placement_pub_affiliate {
+    view_label: "Check Placement Offer"
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${placement_pub_affiliate.market} = ${affiliate_publisher_performance.market} AND
+      ${affiliate_publisher_performance.pub_id} = CAST(${placement_pub_affiliate.pub_id} AS STRING) AND
+      ${affiliate_publisher_performance.offer_id} = CAST(${placement_pub_affiliate.offer_id} AS STRING);;
+    fields: [placement_pub_affiliate.placement]
+  }
   join: affiliate_publisher_measures {
     view_label: "Calculated Metrics"
     relationship: one_to_one
     sql:   ;;
-}
+
+  }
 }
 explore: inventory_week_active {}
 explore: inventory_snapshot_us {}
