@@ -1,10 +1,4 @@
 view: affiliate_performance_measures {
-  measure: click_through_rate {
-    type:  number
-    value_format_name: "percent_2"
-    sql: ${affiliate_daily_performance_us.clicks} / NULLIF(${affiliate_daily_performance_us.impressions},0);;
-    drill_fields: []
-  }
   measure: conversion_rate {
     type:  number
     value_format_name: "percent_2"

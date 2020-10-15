@@ -1,7 +1,7 @@
 view: inventory_week_active {
     derived_table: {
-      explore_source: inventory_snapshot {
-        column: snapshot_week {}
+      explore_source: inventory_snapshot_us {
+        column: day_week{}
         column: count {}
         column: count_of_active_item_days {}
         column: count_of_inactive_item_days {}
@@ -11,9 +11,9 @@ view: inventory_week_active {
     dimension: pk {
       primary_key: yes
       hidden: yes
-      sql: ${snapshot_week} || ${sku} ;;
+      sql: ${day_week} || ${sku} ;;
     }
-    dimension: snapshot_week {
+    dimension: day_week {
       type: date_week
     }
     dimension: count {

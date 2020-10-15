@@ -9,11 +9,11 @@ view: cac_us {
       }
     }
   }
-  dimension_group: date {
+  dimension_group: dategroup {
     type: time
     timeframes: [date, week, month, year]
     datatype: date
-    sql: ${TABLE}.date ;;
+    sql: ${TABLE}.date_date ;;
   }
   dimension: transactions {
     description: "Orders"

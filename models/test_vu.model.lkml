@@ -156,7 +156,7 @@ explore: order_line {
   }
   join: inventory_week_active {
     relationship: many_to_one
-    sql_on: ${order.created_week} = ${inventory_week_active.snapshot_week}
+    sql_on: ${order.created_week} = ${inventory_week_active.day_week}_week}
     AND ${order_line.sku} = ${inventory_week_active.sku};;
   }
   join: customer {
@@ -286,6 +286,16 @@ explore: cac_us {
   join: bing_daily_us {
     type: left_outer
     relationship: one_to_many
-    sql_on: ${bing_daily_us.date_date} = ${cac_us.date_date} ;;
+    sql_on: ${bing_daily_us.date_date} = ${cac_us.dategroup_date} ;;
+    fields: [bing_daily_us.spend,bing_daily_us.revenue, bing_daily_us.conversions]
   }
 }
+explore: affiliate_publisher_performance {
+  join: affiliate_publisher_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
+}
+}
+explore: inventory_week_active {}
+explore: inventory_snapshot_us {}

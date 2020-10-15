@@ -3,7 +3,7 @@ view: affiliate_daily_performance_us {
     sql:
       SELECT * FROM
         (
-          SELECT *, RANK() OVER(PARTITION BY transaction_date, market
+          SELECT DISTINCT *, DENSE_RANK() OVER(PARTITION BY transaction_date, market
                  ORDER BY write_day DESC) AS rank
           FROM `aerobic-datum-283623.test_dataset_vu.rakuten_report`
           WHERE transaction_date < EXTRACT(DATE FROM CURRENT_TIMESTAMP() AT TIME ZONE 'America/Los_Angeles')
@@ -36,14 +36,10 @@ view: affiliate_daily_performance_us {
     WHEN{% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(${TABLE}.transaction_date, MONTH) AS STRING)
     END ;;
   }
-  measure: impressions {
-    type: sum
-    description: "Sum of impressions"
-    sql: ${TABLE}.of_impressions ;;
-  }
   measure: clicks {
     type: sum
     description: "Sum of clicks"
+    drill_fields: [transaction_date, clicks]
     sql: ${TABLE}.of_clicks ;;
   }
   measure: orders {
