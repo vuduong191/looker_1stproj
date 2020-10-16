@@ -309,3 +309,18 @@ explore: affiliate_publisher_performance {
 }
 explore: inventory_week_active {}
 explore: inventory_snapshot_us {}
+explore: affiliate_pub_placement_vs_non {
+  join: placement_payment {
+    view_label: "Payment"
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${affiliate_pub_placement_vs_non.market} = ${placement_payment.market} AND
+      ${affiliate_pub_placement_vs_non.pub_id} = CAST(${placement_payment.pub_id} AS STRING) AND
+      ${affiliate_pub_placement_vs_non.transaction_date} = ${placement_payment.payment_day_date} AND
+
+      ;;
+    fields: [placement_payment.placement_amount]
+  }
+}
+      # ${affiliate_pub_placement_vs_non.placement} = "placement"
+explore: affiliate_pub_placement_vs_non_2 {}
