@@ -47,6 +47,11 @@ view: placement_payment {
     type: string
     sql: ${TABLE}.pub_id ;;
   }
+  dimension: placement_day {
+    type: string
+    sql: ${TABLE}.placement_day ;;
+  }
+
   dimension: market {
     type: string
     sql: ${TABLE}.market ;;

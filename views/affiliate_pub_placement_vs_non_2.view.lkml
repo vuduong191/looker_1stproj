@@ -12,6 +12,7 @@ view: affiliate_pub_placement_vs_non_2 {
       column: net_items {}
       column: orders {}
       column: pub_id {}
+      column: placement_day { field: placement_payment.placement_day }
       column: sales {}
       column: total_commission {}
       column: transaction_date {}
@@ -45,6 +46,7 @@ view: affiliate_pub_placement_vs_non_2 {
     type: number
   }
   dimension: pub_id {}
+  dimension: placement_day {}
 
   dimension: sales {
     hidden: yes

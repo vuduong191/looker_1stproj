@@ -291,20 +291,10 @@ explore: cac_us {
   }
 }
 explore: affiliate_publisher_performance {
-  join: placement_pub_affiliate {
-    view_label: "Check Placement Offer"
-    relationship: many_to_one
-    type: left_outer
-    sql_on: ${placement_pub_affiliate.market} = ${affiliate_publisher_performance.market} AND
-      ${affiliate_publisher_performance.pub_id} = CAST(${placement_pub_affiliate.pub_id} AS STRING) AND
-      ${affiliate_publisher_performance.offer_id} = CAST(${placement_pub_affiliate.offer_id} AS STRING);;
-    fields: [placement_pub_affiliate.placement]
-  }
   join: affiliate_publisher_measures {
     view_label: "Calculated Metrics"
     relationship: one_to_one
     sql:   ;;
-
   }
 }
 explore: inventory_week_active {}
@@ -316,11 +306,17 @@ explore: affiliate_pub_placement_vs_non {
     type: left_outer
     sql_on: ${affiliate_pub_placement_vs_non.market} = ${placement_payment.market} AND
       ${affiliate_pub_placement_vs_non.pub_id} = CAST(${placement_payment.pub_id} AS STRING) AND
-      ${affiliate_pub_placement_vs_non.transaction_date} = ${placement_payment.payment_day_date} AND
-
+      ${affiliate_pub_placement_vs_non.transaction_date} = ${placement_payment.payment_day_date}
       ;;
-    fields: [placement_payment.placement_amount]
+    fields: [placement_payment.placement_amount,placement_payment.placement_day]
   }
 }
       # ${affiliate_pub_placement_vs_non.placement} = "placement"
-explore: affiliate_pub_placement_vs_non_2 {}
+explore: affiliate_pub_placement_vs_non_2 {
+  join: affiliate_final_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
+}
+}
+explore: placement_payment {}
