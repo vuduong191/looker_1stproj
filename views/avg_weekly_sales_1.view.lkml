@@ -72,10 +72,10 @@ view: avg_weekly_sales_1 {
       value_format:"0"
       sql: ${created_week} ;;
     }
-  measure: sku_count {
-    type: count_distinct
-    value_format_name: decimal_0
-    sql: ${sku} ;;
-  }
+    measure: sku_count {
+      type: count_distinct
+      value_format_name: decimal_0
+      sql: ${sku} ;;
+    }
 
   }

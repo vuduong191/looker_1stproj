@@ -1,5 +1,6 @@
 view: inventory_week_active {
     derived_table: {
+      sql_trigger_value: SELECT EXTRACT(WEEK FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL -10 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
       explore_source: inventory_snapshot_us {
         column: day_week{}
         column: count {}
@@ -33,5 +34,5 @@ view: inventory_week_active {
       type: yesno
       sql: ${count_of_inactive_item_days} > 0 ;;
     }
-  dimension: sku {}
+    dimension: sku {}
   }

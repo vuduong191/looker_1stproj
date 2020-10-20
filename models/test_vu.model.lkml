@@ -254,13 +254,13 @@ explore: inventory_snapshot {
 explore: avg_spent_by_state {}
 explore: avg_weekly_sales_2 {}
 explore: avg_weekly_sales_1 {
-  join: avg_weekly_sales_2 {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${avg_weekly_sales_1.sku}=${avg_weekly_sales_2.sku} ;;
-    fields: [avg_weekly_sales_2.rank_group_l12w]
-    view_label: "L12W Data"
-  }
+  # join: avg_weekly_sales_2 {
+  #   type: left_outer
+  #   relationship: one_to_one
+  #   sql_on: ${avg_weekly_sales_1.sku}=${avg_weekly_sales_2.sku} ;;
+  #   fields: [avg_weekly_sales_2.rank_group_l12w]
+  #   view_label: "L12W Data"
+  # }
 }
 explore: order_shipping_line {}
 explore: order_tag {}
