@@ -1,7 +1,7 @@
 view: affiliate_pub_placement_vs_non {
   derived_table: {
     explore_source: affiliate_publisher_performance {
-      column: transaction_date {}
+      column: transaction_raw {}
       # column: placement { field: placement_pub_affiliate.placement }
       column: clicks {}
       column: market {}
@@ -15,9 +15,9 @@ view: affiliate_pub_placement_vs_non {
   }
   dimension_group: transaction {
     type: time
-    timeframes: [date, week, month, year]
+    timeframes: [raw, date, week, month, year]
     datatype: date
-    sql: ${TABLE}.transaction_date ;;
+    sql: ${TABLE}.transaction_raw ;;
   }
   # dimension: placement {
   #   type: string

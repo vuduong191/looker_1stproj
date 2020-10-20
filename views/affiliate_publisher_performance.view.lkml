@@ -14,7 +14,7 @@ view: affiliate_publisher_performance {
 
   dimension_group: transaction {
     type: time
-    timeframes: [date, week, month, year]
+    timeframes: [raw, date, week, month, year]
     datatype: date
     sql: ${TABLE}.transaction_date ;;
   }

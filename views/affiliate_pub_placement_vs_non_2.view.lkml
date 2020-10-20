@@ -15,7 +15,7 @@ view: affiliate_pub_placement_vs_non_2 {
       column: placement_day { field: placement_payment.placement_day }
       column: sales {}
       column: total_commission {}
-      column: transaction_date {}
+      column: transaction_raw {}
       column: placement_amount { field: placement_payment.placement_amount }
       derived_column: placement_fee_and_com {
         sql:  ifnull(placement_amount, 0 ) + ifnull(total_commission, 0 )  ;;
@@ -59,11 +59,17 @@ view: affiliate_pub_placement_vs_non_2 {
     type: number
   }
 
+  # dimension_group: transaction {
+  #   type: time
+  #   timeframes: [date, week, month, year]
+  #   datatype: date
+  #   sql: ${TABLE}.transaction_date ;;
+  # }
   dimension_group: transaction {
     type: time
     timeframes: [date, week, month, year]
     datatype: date
-    sql: ${TABLE}.transaction_date ;;
+    sql: ${TABLE}.transaction_raw ;;
   }
   parameter: timeframe_picker {
     label: "Date Granularity"
@@ -84,12 +90,12 @@ view: affiliate_pub_placement_vs_non_2 {
   }
   measure: commission {
     type: sum
-    value_format: "0.00"
+    value_format: "#,##0.00"
     sql: ${total_commission} ;;
   }
   measure: order_count {
     type: sum
-    value_format: "0.00"
+    value_format: "0"
     sql: ${orders} ;;
   }
   measure: revenue {
