@@ -22,6 +22,7 @@ view: inventory_week_active {
     }
     dimension: count_of_active_item_days {
       type: number
+      drill_fields: [inventory_snapshot_us.day_raw, inventory_snapshot_us.inventory_quantity]
     }
     dimension: count_of_inactive_item_days {
       type: number

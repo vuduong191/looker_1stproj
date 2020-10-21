@@ -1,5 +1,6 @@
 view: avg_weekly_sales_1 {
     derived_table: {
+      sql_trigger_value: SELECT EXTRACT(WEEK FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL -10 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
       explore_source: order_line {
         column: sku {}
         column: created_week { field: order.created_week }
@@ -10,7 +11,7 @@ view: avg_weekly_sales_1 {
         column: size { field: vu_product_data_us.size }
         column: number_sold { field: order_line.total_units_sold}
         column: total_price {}
-          filters: [
+        filters: [
           inventory_week_active.is_inactive : "No",
           order_is_marketing.is_marketing: "No",
           order.is_cancelled : "No",
@@ -21,7 +22,7 @@ view: avg_weekly_sales_1 {
           value: "web,580111"
         }
       }
-      persist_for: "12 hours"
+
     }
     dimension: pk {
       primary_key: yes

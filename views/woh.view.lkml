@@ -27,6 +27,7 @@ view: woh {
     }
     dimension: sku {}
     dimension: inventory_quantity {
+      label: "Current Inv"
       type: number
     }
     dimension: woh {

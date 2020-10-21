@@ -156,7 +156,7 @@ explore: order_line {
   }
   join: inventory_week_active {
     relationship: many_to_one
-    sql_on: ${order.created_week} = ${inventory_week_active.day_week}_week}
+    sql_on: ${order.created_week} = ${inventory_week_active.day_week}
     AND ${order_line.sku} = ${inventory_week_active.sku};;
   }
   join: customer {
