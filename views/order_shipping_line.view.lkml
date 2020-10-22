@@ -1,5 +1,5 @@
 view: order_shipping_line {
-  sql_table_name: `aerobic-datum-283623.shopify.order_shipping_line`
+  sql_table_name: `@{schema}.order_shipping_line`
     ;;
   drill_fields: [id]
 

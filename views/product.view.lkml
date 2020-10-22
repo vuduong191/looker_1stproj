@@ -1,5 +1,5 @@
 view: product {
-  sql_table_name: `aerobic-datum-283623.shopify.product`
+  sql_table_name: `@{schema}.product`
     ;;
   drill_fields: [id]
 

@@ -1,5 +1,5 @@
 view: product_variant {
-  sql_table_name: `aerobic-datum-283623.shopify.product_variant`
+  sql_table_name: `@{schema}.product_variant`
     ;;
   drill_fields: [id]
 

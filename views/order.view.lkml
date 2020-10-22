@@ -1,7 +1,15 @@
 view: order {
-  sql_table_name: `aerobic-datum-283623.shopify.order`
+  sql_table_name: `@{schema}.order`
     ;;
   drill_fields: [id]
+
+  parameter: date_granularity {
+    type: string
+    allowed_value: { value: "Date" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    default_value: "Date"
+    }
 
   dimension: id {
     primary_key: yes
@@ -177,6 +185,18 @@ view: order {
       year
     ]
     sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: flexible_date {
+    type: date
+    sql: CASE
+    WHEN {% parameter date_granularity %} = 'Date' THEN DATE_TRUNC(${created_date}, DAY)
+    WHEN {% parameter date_granularity %} = 'Week' THEN DATE_TRUNC(${created_date}, WEEK)
+    WHEN {% parameter date_granularity %} = 'Month' THEN DATE_TRUNC(${created_date}, MONTH)
+    ELSE null
+    END
+    ;;
+    datatype: date
   }
 
   dimension: currency {

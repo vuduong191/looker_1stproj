@@ -1,5 +1,5 @@
 view: order_tag {
-  sql_table_name: `aerobic-datum-283623.shopify.order_tag`
+  sql_table_name: `@{schema}.order_tag`
     ;;
 
   dimension: pk {

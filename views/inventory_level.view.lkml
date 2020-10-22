@@ -1,5 +1,5 @@
 view: inventory_level {
-  sql_table_name: `aerobic-datum-283623.shopify.inventory_level`
+  sql_table_name: `@{schema}.inventory_level`
     ;;
 
   dimension_group: _fivetran_synced {

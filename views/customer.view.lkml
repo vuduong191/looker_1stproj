@@ -1,5 +1,5 @@
 view: customer {
-  sql_table_name: `aerobic-datum-283623.shopify.customer`
+  sql_table_name: `@{schema}.customer`
     ;;
   drill_fields: [id, created_date]
 

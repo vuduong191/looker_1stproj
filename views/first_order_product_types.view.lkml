@@ -3,13 +3,13 @@ view: first_order_product_types {
     sql: SELECT
         string_agg(distinct product.product_type order by product_type)  AS product_types,
         customer.id  AS customer_id
-      FROM `aerobic-datum-283623.shopify.order_line`
+      FROM `@{schema}.order_line`
            AS order_line
-      LEFT JOIN `aerobic-datum-283623.shopify.order`
+      LEFT JOIN `@{schema}.order`
            AS `order` ON (`order`.id)=order_line.order_id
-      LEFT JOIN `aerobic-datum-283623.shopify.product`
+      LEFT JOIN `@{schema}.product`
            AS product ON order_line.product_id=product.id
-      LEFT JOIN `aerobic-datum-283623.shopify.customer`
+      LEFT JOIN `@{schema}.customer`
            AS customer ON customer.id = (`order`.customer_id)
 
       WHERE ((product.product_type IS NOT NULL) AND product.product_type not in ('','Hidden') )

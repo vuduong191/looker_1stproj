@@ -1,5 +1,5 @@
 view: fulfillment_order_line {
-  sql_table_name: `aerobic-datum-283623.shopify.fulfillment_order_line`
+  sql_table_name: `@{schema}.fulfillment_order_line`
     ;;
 
   dimension_group: _fivetran_synced {

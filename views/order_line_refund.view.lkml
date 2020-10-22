@@ -1,5 +1,5 @@
 view: order_line_refund {
-  sql_table_name: `aerobic-datum-283623.shopify.order_line_refund`
+  sql_table_name: `@{schema}.order_line_refund`
     ;;
   drill_fields: [id]
 

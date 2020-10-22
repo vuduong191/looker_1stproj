@@ -6,6 +6,7 @@ view: inventory_insert_native {
         column: product_id {}
         column: sku {}
         column: title {}
+        filters: [countries.country: "US"]
       }
     persist_for: "1 hour"
     }

@@ -1,5 +1,5 @@
 view: refund {
-  sql_table_name: `aerobic-datum-283623.shopify.refund`
+  sql_table_name: `@{schema}.refund`
     ;;
   drill_fields: [id]
 

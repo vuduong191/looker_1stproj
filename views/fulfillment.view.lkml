@@ -1,5 +1,5 @@
 view: fulfillment {
-  sql_table_name: `aerobic-datum-283623.shopify.fulfillment`
+  sql_table_name: `@{schema}.fulfillment`
     ;;
   drill_fields: [id]
 

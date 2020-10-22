@@ -14,7 +14,7 @@ view: inventory_insert {
         product_variant.sku  AS sku,
         product_variant.title  AS title,
         CURRENT_DATE AS snapshot_date,
-      FROM `aerobic-datum-283623.shopify.product_variant`
+      FROM `@{schema}.product_variant`
           AS product_variant
       inner join max_date on 1=1
       where CURRENT_DATE > max_date.max_date

@@ -15,7 +15,14 @@ datagroup: daily_datagroup {
 persist_with: test_vu_default_datagroup
 
 explore: campaign {
+
   fields: [ALL_FIELDS*,-_fivetran_deleted]
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: email_template {
     type: left_outer
     sql_on: ${campaign.email_template_id} = ${email_template.id} ;;
@@ -30,6 +37,12 @@ explore: campaign {
 }
 
 explore: campaign_list {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: list {
     type: left_outer
     sql_on: ${campaign_list.list_id} = ${list.id} ;;
@@ -49,11 +62,38 @@ explore: campaign_list {
   }
 }
 
-explore: order {}
+explore: order {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
 
-explore: email_template {}
-explore: customer {}
+explore: email_template {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
+explore: customer {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
 explore: event {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: flow {
     type: left_outer
     sql_on: ${event.flow_id} = ${flow.id} ;;
@@ -93,13 +133,40 @@ explore: event {
 
 explore: fivetran_audit {}
 
-explore: flow {}
+explore: flow {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
 
-explore: integration {}
+explore: integration {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
 
-explore: list {}
+explore: list {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
 
 explore: list_exclusion {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: list {
     type: left_outer
     sql_on: ${list_exclusion.list_id} = ${list.id} ;;
@@ -108,6 +175,12 @@ explore: list_exclusion {
 }
 
 explore: metric {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: integration {
     type: left_outer
     sql_on: ${metric.integration_id} = ${integration.id} ;;
@@ -116,6 +189,12 @@ explore: metric {
 }
 
 explore: order_line {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+  }
   join: order {
     type: left_outer
     relationship: many_to_one
@@ -183,8 +262,21 @@ explore: order_line {
     sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;
   }
 }
-explore: person {}
+explore: person {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
 explore: inventory_level {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   hidden: yes
   join: product_variant {
     relationship: many_to_one
@@ -197,6 +289,12 @@ explore: inventory_level {
 }
 
 explore: product_variant {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: vu_product_data_us {
     type: left_outer
     view_label: "Manual Data"
@@ -232,12 +330,30 @@ explore: product_variant {
   }
 }
 explore: inventory_insert {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   hidden: yes
 }
 explore: inventory_insert_native {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   hidden: yes
 }
 explore: inventory_snapshot {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: product_variant {
     relationship: many_to_one
     sql_on: ${inventory_snapshot.inventory_item_id} = ${product_variant.inventory_item_id} ;;
@@ -247,9 +363,29 @@ explore: inventory_snapshot {
     sql_on: ${product_variant.product_id} = ${product.id} ;;
   }
 }
-explore: avg_spent_by_state {}
-explore: avg_weekly_sales_2 {}
+explore: avg_spent_by_state {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
+explore: avg_weekly_sales_2 {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
 explore: avg_weekly_sales_1 {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
   join: avg_weekly_sales_2 {
     type: left_outer
     relationship: one_to_one
@@ -258,7 +394,35 @@ explore: avg_weekly_sales_1 {
     view_label: "L12W Data"
   }
 }
-explore: order_shipping_line {}
-explore: order_tag {}
-explore: order_is_b2b {}
-explore: woh {}
+explore: order_shipping_line {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
+explore: order_tag {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
+explore: order_is_b2b {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
+explore: woh {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+}
+}
