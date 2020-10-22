@@ -1,7 +1,8 @@
 view: inventory_week_active {
     derived_table: {
-      explore_source: inventory_snapshot {
-        column: snapshot_week {}
+      sql_trigger_value: SELECT EXTRACT(WEEK FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL -10 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
+      explore_source: inventory_snapshot_us {
+        column: day_week{}
         column: count {}
         column: count_of_active_item_days {}
         column: count_of_inactive_item_days {}
@@ -11,9 +12,9 @@ view: inventory_week_active {
     dimension: pk {
       primary_key: yes
       hidden: yes
-      sql: ${snapshot_week} || ${sku} ;;
+      sql: ${day_week} || ${sku} ;;
     }
-    dimension: snapshot_week {
+    dimension: day_week {
       type: date_week
     }
     dimension: count {
@@ -21,6 +22,7 @@ view: inventory_week_active {
     }
     dimension: count_of_active_item_days {
       type: number
+      drill_fields: [inventory_snapshot_us.day_raw, inventory_snapshot_us.inventory_quantity]
     }
     dimension: count_of_inactive_item_days {
       type: number
@@ -33,5 +35,5 @@ view: inventory_week_active {
       type: yesno
       sql: ${count_of_inactive_item_days} > 0 ;;
     }
-  dimension: sku {}
+    dimension: sku {}
   }

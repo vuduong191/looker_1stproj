@@ -2,7 +2,7 @@ connection: "klaviyo"
 
 # include all the views
 include: "/views/**/*.view"
-
+include: "/dashboards/*.dashboard"
 datagroup: test_vu_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
@@ -235,7 +235,7 @@ explore: order_line {
   }
   join: inventory_week_active {
     relationship: many_to_one
-    sql_on: ${order.created_week} = ${inventory_week_active.snapshot_week}
+    sql_on: ${order.created_week} = ${inventory_week_active.day_week}
     AND ${order_line.sku} = ${inventory_week_active.sku};;
   }
   join: customer {
@@ -338,6 +338,10 @@ explore: inventory_insert {
 }
   hidden: yes
 }
+explore: inventory_insert_2_vu {
+  hidden: yes
+}
+
 explore: inventory_insert_native {
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
@@ -393,7 +397,9 @@ explore: avg_weekly_sales_1 {
     fields: [avg_weekly_sales_2.rank_group_l12w]
     view_label: "L12W Data"
   }
+
 }
+
 explore: order_shipping_line {
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
@@ -426,3 +432,58 @@ explore: woh {
     sql:    ;;
 }
 }
+
+explore: affiliate_daily_performance_us {
+  join: affiliate_performance_measures {
+    view_label: "Affiliate Metrics"
+    relationship: one_to_one
+    sql:   ;;
+  }
+}
+explore: ga_channel_performance_us {}
+explore: ga_channel_us {
+  join: ga_us_channel_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
+  }
+}
+explore: bing_daily_us {}
+explore: cac_us {
+  join: bing_daily_us {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${bing_daily_us.date_date} = ${cac_us.dategroup_date} ;;
+    fields: [bing_daily_us.spend,bing_daily_us.revenue, bing_daily_us.conversions]
+  }
+}
+explore: affiliate_publisher_performance {
+  join: affiliate_publisher_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
+  }
+}
+explore: inventory_week_active {}
+explore: inventory_snapshot_us {}
+explore: affiliate_pub_placement_vs_non {
+  join: placement_payment {
+    view_label: "Payment"
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${affiliate_pub_placement_vs_non.market} = ${placement_payment.market} AND
+      ${affiliate_pub_placement_vs_non.pub_id} = CAST(${placement_payment.pub_id} AS STRING) AND
+      ${affiliate_pub_placement_vs_non.transaction_date} = ${placement_payment.payment_day_date}
+      ;;
+    fields: [placement_payment.placement_amount,placement_payment.placement_day]
+  }
+}
+      # ${affiliate_pub_placement_vs_non.placement} = "placement"
+explore: affiliate_pub_placement_vs_non_2 {
+  join: affiliate_final_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
+}
+}
+explore: placement_payment {}
