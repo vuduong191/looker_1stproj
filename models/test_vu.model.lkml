@@ -333,3 +333,11 @@ explore: affiliate_pub_placement_vs_non_2 {
 }
 }
 explore: placement_payment {}
+explore: inventory_snapshot_switchable {
+  always_filter: { filters: [countries.country: "US"]}
+  always_join: [countries]
+  join: countries {
+    relationship: one_to_one
+    sql:    ;;
+  }
+}

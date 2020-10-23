@@ -9,3 +9,14 @@ constant: schema {
 constant: klaviyo_schema {
   value: "{% if countries.country._parameter_value == 'AU' %}klaviyo_au{% else %}klaviyo{% endif  %}"
 }
+
+# Inventory Snapshot Schema
+constant: inventory_table {
+  value: "{% if countries.country._parameter_value == 'AU' %}inventory_snapshot_au{% else %}inventory_snapshot_us{% endif  %}"
+}
+
+
+# For all
+constant: country_code {
+  value: "{% if countries.country._parameter_value == 'AU' %}au{% else %}us{% endif  %}"
+}
