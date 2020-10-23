@@ -16,21 +16,23 @@ view: inventory_week_active {
     }
     dimension: day_week {
       type: date_week
+      convert_tz: no
+      # datatype: date
     }
     dimension: count {
       type: number
     }
-    dimension: count_of_active_item_days {
-      type: number
-      drill_fields: [inventory_snapshot_us.day_raw, inventory_snapshot_us.inventory_quantity]
-    }
+    # dimension: count_of_active_item_days {
+    #   type: number
+    #   drill_fields: [inventory_snapshot_us.day_raw, inventory_snapshot_us.inventory_quantity]
+    # }
     dimension: count_of_inactive_item_days {
       type: number
     }
-    dimension: is_active {
-      type: yesno
-      sql: ${count_of_active_item_days} = 7 ;;
-    }
+    # dimension: is_active {
+    #   type: yesno
+    #   sql: ${count_of_active_item_days} = 7 ;;
+    # }
     dimension: is_inactive {
       type: yesno
       sql: ${count_of_inactive_item_days} > 0 ;;

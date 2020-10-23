@@ -14,53 +14,6 @@ datagroup: daily_datagroup {
 
 persist_with: test_vu_default_datagroup
 
-explore: campaign {
-
-  fields: [ALL_FIELDS*,-_fivetran_deleted]
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-  join: email_template {
-    type: left_outer
-    sql_on: ${campaign.email_template_id} = ${email_template.id} ;;
-    relationship: many_to_one
-  }
-  join: campaign_list {
-    type: left_outer
-    sql_on: ${campaign_list.campaign_id} = ${campaign.id} ;;
-    relationship: one_to_many
-    fields: [campaign_list.list_id]
-  }
-}
-
-explore: campaign_list {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-  join: list {
-    type: left_outer
-    sql_on: ${campaign_list.list_id} = ${list.id} ;;
-    relationship: many_to_one
-  }
-
-  join: campaign {
-    type: left_outer
-    sql_on: ${campaign_list.campaign_id} = ${campaign.id} ;;
-    relationship: many_to_one
-  }
-
-  join: email_template {
-    type: left_outer
-    sql_on: ${campaign.email_template_id} = ${email_template.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: order {
   always_filter: { filters: [countries.country: "US"]}
@@ -87,49 +40,6 @@ explore: customer {
     sql:    ;;
 }
 }
-explore: event {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-  join: flow {
-    type: left_outer
-    sql_on: ${event.flow_id} = ${flow.id} ;;
-    relationship: many_to_one
-  }
-
-  join: campaign {
-    type: left_outer
-    sql_on: ${event.campaign_id} = ${campaign.id} ;;
-    relationship: many_to_one
-  }
-
-  join: person {
-    type: left_outer
-    sql_on: ${event.person_id} = ${person.id} ;;
-    relationship: many_to_one
-  }
-
-  join: metric {
-    type: left_outer
-    sql_on: ${event.metric_id} = ${metric.id} ;;
-    relationship: many_to_one
-  }
-
-  join: email_template {
-    type: left_outer
-    sql_on: ${campaign.email_template_id} = ${email_template.id} ;;
-    relationship: many_to_one
-  }
-
-  join: integration {
-    type: left_outer
-    sql_on: ${metric.integration_id} = ${integration.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: fivetran_audit {}
 
@@ -151,42 +61,6 @@ explore: integration {
 }
 }
 
-explore: list {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-}
-
-explore: list_exclusion {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-  join: list {
-    type: left_outer
-    sql_on: ${list_exclusion.list_id} = ${list.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: metric {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-  join: integration {
-    type: left_outer
-    sql_on: ${metric.integration_id} = ${integration.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: order_line {
   always_filter: { filters: [countries.country: "US"]}
@@ -262,14 +136,7 @@ explore: order_line {
     sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;
   }
 }
-explore: person {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-}
+
 explore: inventory_level {
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
@@ -329,28 +196,7 @@ explore: product_variant {
     sql_on: ${product_variant.sku}=${avg_weekly_sales_2.sku} ;;
   }
 }
-explore: inventory_insert {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-  hidden: yes
-}
-explore: inventory_insert_2_vu {
-  hidden: yes
-}
 
-explore: inventory_insert_native {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-  hidden: yes
-}
 explore: inventory_snapshot {
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]

@@ -32,6 +32,7 @@ view: avg_weekly_sales_1 {
     dimension: sku {}
     dimension: created_week {
       type: date_week
+      convert_tz: no
     }
     dimension: number_sold {
       label: "Order Line Total Unit Sold"
