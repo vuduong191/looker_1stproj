@@ -24,14 +24,7 @@ explore: order {
 }
 }
 
-explore: email_template {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-}
+
 explore: customer {
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
@@ -43,14 +36,7 @@ explore: customer {
 
 explore: fivetran_audit {}
 
-explore: flow {
-  always_filter: { filters: [countries.country: "US"]}
-  always_join: [countries]
-  join: countries {
-    relationship: one_to_one
-    sql:    ;;
-}
-}
+
 
 explore: integration {
   always_filter: { filters: [countries.country: "US"]}
