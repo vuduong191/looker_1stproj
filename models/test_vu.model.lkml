@@ -129,7 +129,7 @@ explore: inventory_level {
   join: countries {
     relationship: one_to_one
     sql:    ;;
-}
+  }
   hidden: yes
   join: product_variant {
     relationship: many_to_one
@@ -273,6 +273,8 @@ explore: affiliate_daily_performance_us {
   }
 }
 explore: ga_channel_performance_us {}
+explore: ga_channel_performance_au {}
+
 explore: ga_channel_us {
   join: ga_us_channel_measures {
     view_label: "Calculated Metrics"
@@ -296,6 +298,28 @@ explore: affiliate_publisher_performance {
     sql:   ;;
   }
 }
+explore: affiliate_performance_us_au {
+  join: placement_payment {
+    view_label: "Payment"
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${affiliate_performance_us_au.market} = ${placement_payment.market} AND
+      ${affiliate_performance_us_au.pub_id} = CAST(${placement_payment.pub_id} AS STRING) AND
+      ${affiliate_performance_us_au.transaction_date} = ${placement_payment.payment_day_date}
+      ;;
+    fields: [placement_payment.placement_amount,placement_payment.placement_day]
+  }
+}
+explore: affiliate_performance_us_au_2 {
+  join: ga_affiliate_traffic_order_us {
+    view_label: "GA Data"
+    relationship: one_to_one
+    type: left_outer
+    sql_on: ${affiliate_performance_us_au_2.market} = "us" AND
+      ${affiliate_performance_us_au_2.transaction_date} = ${ga_affiliate_traffic_order_us.date_date}
+      ;;
+  }
+}
 explore: inventory_week_active {}
 explore: inventory_snapshot_us {}
 explore: affiliate_pub_placement_vs_non {
@@ -309,9 +333,20 @@ explore: affiliate_pub_placement_vs_non {
       ;;
     fields: [placement_payment.placement_amount,placement_payment.placement_day]
   }
+
 }
-      # ${affiliate_pub_placement_vs_non.placement} = "placement"
+
 explore: affiliate_pub_placement_vs_non_2 {
+  join: ga_affiliate_traffic_order_us {
+    view_label: "GA Data"
+    relationship: one_to_one
+    type: left_outer
+    sql_on: ${affiliate_pub_placement_vs_non_2.market} = "us" AND
+      ${affiliate_pub_placement_vs_non_2.transaction_date} = ${ga_affiliate_traffic_order_us.date_date}
+      ;;
+  }
+}
+explore: affiliate_pub_placement_vs_non_us {
   join: affiliate_final_measures {
     view_label: "Calculated Metrics"
     relationship: one_to_one
@@ -327,3 +362,7 @@ explore: inventory_snapshot_switchable {
     sql:    ;;
   }
 }
+
+
+# include channel
+explore: ga_affiliate_traffic_order_us {}

@@ -560,115 +560,59 @@
     row: 30
     col: 12
     width: 12
-  - name: order_cac_aff_us
-    title: Order and CAC US
-    model: test_vu
-    explore: affiliate_pub_placement_vs_non_2
-    type: looker_line
-    fields: [affiliate_pub_placement_vs_non_2.dynamic_timeframe, affiliate_final_measures.cac,
-      affiliate_pub_placement_vs_non_2.order_count]
-    listen:
-      date_aggregation: affiliate_pub_placement_vs_non_2.timeframe_picker
-      date: affiliate_pub_placement_vs_non_2.transaction_date
-    filters:
-      affiliate_pub_placement_vs_non_2.market: us
-    sorts: [affiliate_pub_placement_vs_non_2.dynamic_timeframe]
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: true
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    show_null_points: true
-    interpolation: linear
-    y_axes: [{label: '', orientation: left, series: [{axisId: affiliate_final_measures.cac,
-            id: affiliate_final_measures.cac, name: Cac}], showLabels: true, showValues: true,
-        unpinAxis: false, tickDensity: default, type: linear}, {label: '', orientation: right,
-        series: [{axisId: affiliate_pub_placement_vs_non_2.order_count, id: affiliate_pub_placement_vs_non_2.order_count,
-            name: Order Count}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, type: linear}]
-    series_types: {}
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    row: 39
-    col: 0
-    width: 12
-  - name: order_cac_aff_au
-    title: Order and CAC AU
-    model: test_vu
-    explore: affiliate_pub_placement_vs_non_2
-    type: looker_line
-    fields: [affiliate_pub_placement_vs_non_2.dynamic_timeframe, affiliate_final_measures.cac,
-      affiliate_pub_placement_vs_non_2.order_count]
-    listen:
-      date_aggregation: affiliate_pub_placement_vs_non_2.timeframe_picker
-      date: affiliate_pub_placement_vs_non_2.transaction_date
-    filters:
-      affiliate_pub_placement_vs_non_2.market: au
-    sorts: [affiliate_pub_placement_vs_non_2.dynamic_timeframe]
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: true
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    show_null_points: true
-    interpolation: linear
-    y_axes: [{label: '', orientation: left, series: [{axisId: affiliate_final_measures.cac,
-            id: affiliate_final_measures.cac, name: Cac}], showLabels: true, showValues: true,
-        unpinAxis: false, tickDensity: default, type: linear}, {label: '', orientation: right,
-        series: [{axisId: affiliate_pub_placement_vs_non_2.order_count, id: affiliate_pub_placement_vs_non_2.order_count,
-            name: Order Count}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, type: linear}]
-    series_types: {}
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    row: 39
-    col: 12
-    width: 12
+  # - name: order_cac_aff_us
+  #   title: Order and CAC US
+  #   model: test_vu
+  #   explore: affiliate_pub_placement_vs_non_us
+  #   type: looker_line
+  #   fields: [affiliate_pub_placement_vs_non_us.dynamic_timeframe, affiliate_final_measures.cac,
+  #     affiliate_pub_placement_vs_non_us.order_count]
+  #   listen:
+  #     date_aggregation: affiliate_pub_placement_vs_non_us.timeframe_picker
+  #     date: affiliate_pub_placement_vs_non_us.transaction_date
+  #   filters:
+  #     affiliate_pub_placement_vs_non_us.market: us
+  #   sorts: [affiliate_pub_placement_vs_non_us.dynamic_timeframe]
+  #   limit: 500
+  #   column_limit: 50
+  #   query_timezone: America/Los_Angeles
+  #   x_axis_gridlines: false
+  #   y_axis_gridlines: true
+  #   show_view_names: false
+  #   show_y_axis_labels: true
+  #   show_y_axis_ticks: true
+  #   y_axis_tick_density: default
+  #   y_axis_tick_density_custom: 5
+  #   show_x_axis_label: true
+  #   show_x_axis_ticks: true
+  #   y_axis_scale_mode: linear
+  #   x_axis_reversed: false
+  #   y_axis_reversed: false
+  #   plot_size_by_field: false
+  #   trellis: ''
+  #   stacking: ''
+  #   limit_displayed_rows: false
+  #   legend_position: center
+  #   point_style: none
+  #   show_value_labels: true
+  #   label_density: 25
+  #   x_axis_scale: auto
+  #   y_axis_combined: true
+  #   show_null_points: true
+  #   interpolation: linear
+  #   y_axes: [{label: '', orientation: left, series: [{axisId: affiliate_final_measures.cac,
+  #           id: affiliate_final_measures.cac, name: Cac}], showLabels: true, showValues: true,
+  #       unpinAxis: false, tickDensity: default, type: linear}, {label: '', orientation: right,
+  #       series: [{axisId: affiliate_pub_placement_vs_non_us.order_count, id: affiliate_pub_placement_vs_non_us.order_count,
+  #           name: Order Count}], showLabels: true, showValues: true, unpinAxis: false,
+  #       tickDensity: default, type: linear}]
+  #   series_types: {}
+  #   ordering: none
+  #   show_null_labels: false
+  #   show_totals_labels: false
+  #   show_silhouette: false
+  #   totals_color: "#808080"
+  #   defaults_version: 1
+  #   row: 39
+  #   col: 0
+  #   width: 12

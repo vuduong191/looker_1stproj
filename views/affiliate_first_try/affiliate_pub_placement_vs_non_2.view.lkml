@@ -67,7 +67,7 @@ view: affiliate_pub_placement_vs_non_2 {
   # }
   dimension_group: transaction {
     type: time
-    timeframes: [date, week, month, year]
+    timeframes: [raw, date, week, month, year]
     datatype: date
     sql: ${TABLE}.transaction_raw ;;
   }
@@ -92,16 +92,19 @@ view: affiliate_pub_placement_vs_non_2 {
     type: sum
     value_format: "#,##0.00"
     sql: ${total_commission} ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: order_count {
     type: sum
     value_format: "0"
     sql: ${orders} ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: revenue {
     type: sum
     value_format: "#,##0.00"
     sql: ${sales} ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: click_count {
     type: sum
@@ -110,16 +113,19 @@ view: affiliate_pub_placement_vs_non_2 {
   measure: unit_sold {
     type: sum
     sql: ${net_items} ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: placement_fee {
     value_format: "#,##0.00"
     type: sum
     sql: ${placement_amount} ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: fee_and_com_total {
     value_format: "#,##0.00"
     type: sum
     sql: ${placement_fee_and_com} ;;
+    drill_fields: [market,transaction_date,pub_name,placement_fee,commission]
   }
   # measure: avg_weekly_sales {
   #   type: average

@@ -29,7 +29,7 @@ view: ga_channel_us {
   }
   dimension_group: date {
     type: time
-    timeframes: [date, week, month, year]
+    timeframes: [raw, date, week, month, year]
     datatype: date
     sql: ${TABLE}.date_raw ;;
   }

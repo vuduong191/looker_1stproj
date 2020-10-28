@@ -60,24 +60,29 @@ view: affiliate_publisher_performance {
     type: sum
     description: "Sum of clicks"
     sql: ${TABLE}.of_clicks ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: orders {
     type: sum
     sql: ${TABLE}.of_orders ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: net_items {
     type: sum
     description: "Net units sold"
     sql: ${TABLE}.of_net_items ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: sales {
     type: sum
     value_format: "#,##0.00"
     sql: ${TABLE}.sales ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
   measure: total_commission {
     type: sum
     value_format: "#,##0.00"
     sql: ${TABLE}.total_commission ;;
+    drill_fields: [market,transaction_date,pub_name]
   }
 }
