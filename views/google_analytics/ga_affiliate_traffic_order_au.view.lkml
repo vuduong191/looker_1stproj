@@ -17,8 +17,8 @@ view: ga_affiliate_traffic_order_au {
     datatype: date
     sql: ${TABLE}.date_raw ;;
   }
-  dimension: sessions {}
-  dimension: transactions {}
+  # dimension: sessions {}
+  # dimension: transactions {}
   measure: session_count {
     type: sum
     sql: ${TABLE}.sessions ;;

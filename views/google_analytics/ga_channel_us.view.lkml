@@ -9,7 +9,7 @@ view: ga_channel_us {
       column: session_duration {}
       column: pageviews {}
       column: new_users {}
-      column: date_raw {}
+      column: date_date {}
       column: unique_pageviews {}
       column: users {}
     }
@@ -29,9 +29,9 @@ view: ga_channel_us {
   }
   dimension_group: date {
     type: time
-    timeframes: [raw, date, week, month, year]
+    timeframes: [date, week, month, year]
     datatype: date
-    sql: ${TABLE}.date_raw ;;
+    sql: ${TABLE}.date_date;;
   }
   parameter: timeframe_picker {
     label: "Date Granularity"

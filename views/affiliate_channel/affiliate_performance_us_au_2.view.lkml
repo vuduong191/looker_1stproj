@@ -26,6 +26,7 @@ view: affiliate_performance_us_au_2 {
     datatype: date
     sql: ${TABLE}.transaction_date ;;
   }
+
   parameter: timeframe_picker {
     label: "Date Granularity"
     type: string

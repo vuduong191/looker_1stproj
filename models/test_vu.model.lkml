@@ -301,7 +301,7 @@ explore: affiliate_publisher_performance {
 explore: affiliate_performance_us_au {
   join: placement_payment {
     view_label: "Payment"
-    relationship: many_to_one
+    relationship: one_to_one
     type: left_outer
     sql_on: ${affiliate_performance_us_au.market} = ${placement_payment.market} AND
       ${affiliate_performance_us_au.pub_id} = CAST(${placement_payment.pub_id} AS STRING) AND
@@ -310,6 +310,18 @@ explore: affiliate_performance_us_au {
     fields: [placement_payment.placement_amount,placement_payment.placement_day]
   }
 }
+explore: affiliate_performance_us_only {}
+# explore: affiliate_performance_us_au_2 {
+#   join: ga_affiliate_traffic_order_us {
+#     view_label: "GA Data"
+#     relationship: many_to_one
+#     type: left_outer
+#     sql_on: ${affiliate_performance_us_au_2.market} = "us" AND
+#       ${affiliate_performance_us_au_2.transaction_date} = ${ga_affiliate_traffic_order_us.date_date}
+#       ;;
+#   }
+# }
+
 explore: affiliate_performance_us_au_2 {
   join: ga_affiliate_traffic_order_us {
     view_label: "GA Data"
@@ -320,6 +332,7 @@ explore: affiliate_performance_us_au_2 {
       ;;
   }
 }
+
 explore: inventory_week_active {}
 explore: inventory_snapshot_us {}
 explore: affiliate_pub_placement_vs_non {

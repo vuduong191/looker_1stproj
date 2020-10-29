@@ -116,9 +116,20 @@ view: woh {
         else: ">20w"
       }
   }
-    measure: count_sku {
-      type: count_distinct
-      sql: ${sku} ;;
-      drill_fields: [sku,product,size,color,inventory_quantity,avg_weekly_units_sold,active_week_count]
-    }
+  measure: count_sku {
+    type: count_distinct
+    sql: ${sku} ;;
+    drill_fields: [sku,product,size,color,inventory_quantity,avg_weekly_units_sold,active_week_count]
   }
+  measure: sum_weekly_unit_sold {
+    type: sum
+    value_format: "0.0"
+    sql: ${avg_weekly_units_sold} ;;
+  }
+  measure: sum_inventory {
+    label: "Inv_all"
+    type: sum
+    value_format: "0"
+    sql: ${inventory_quantity} ;;
+  }
+}
