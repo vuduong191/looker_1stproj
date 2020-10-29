@@ -52,51 +52,60 @@ view: affiliate_performance_us_only {
         END ;;
   }
   measure: ga_session_fin {
+    label: "GA Traffic"
     type: sum
     value_format: "0"
     sql: ${TABLE}.sessions ;;
     drill_fields: [market,transaction_date]
   }
   measure: ga_order_fin {
+    label: "GA Orders"
     type: sum
     value_format: "0"
     sql: ${TABLE}.transactions ;;
     drill_fields: [market,transaction_date]
   }
   measure: commission_fin {
+    label: "Commision Total"
     type: sum
     value_format: "#,##0.00"
     sql: ${TABLE}.commission ;;
     drill_fields: [market,transaction_date]
   }
   measure: order_count_fin {
+    label: "Orders"
     type: sum
     value_format: "0"
     sql: ${TABLE}.order_count ;;
     drill_fields: [market,transaction_date]
   }
   measure: revenue_fin {
+    label: "Revenue"
     type: sum
     value_format: "#,##0.00"
     sql: ${TABLE}.revenue ;;
     drill_fields: [market,transaction_date]
   }
   measure: click_count_fin {
+    label: "Clicks"
     type: sum
     sql: ${TABLE}.click_count ;;
   }
   measure: unit_sold_fin {
+    label: "Total Units Sold"
     type: sum
     sql: ${TABLE}.unit_sold ;;
     drill_fields: [market,transaction_date]
   }
   measure: placement_fee_fin {
+    label: "Placement Fee"
     value_format: "#,##0.00"
     type: sum
     sql: ${TABLE}.placement_fee ;;
     drill_fields: [market,transaction_date]
   }
   measure: fee_and_com_total_fin {
+    label: "Com & Placement Fee"
     value_format: "#,##0.00"
     type: sum
     sql: ${TABLE}.fee_and_com_total ;;
