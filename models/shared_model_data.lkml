@@ -116,6 +116,7 @@ join: order_customer_dimensions {
   sql:   ;;
 }
 join: first_order_product_types {
+  from: first_order_product_type_switchable
   relationship: many_to_one
   view_label: "Customer"
   sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;

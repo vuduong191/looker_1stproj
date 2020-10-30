@@ -17,6 +17,7 @@ view: first_order_product_types {
       group by 2
        ;;
       datagroup_trigger: daily_datagroup
+      publish_as_db_view: yes
   }
 
 
