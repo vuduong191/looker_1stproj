@@ -5,7 +5,7 @@
   elements:
   - title: Tier 1 - Top 10
     name: Tier 1 - Top 10
-    model: test_vu
+    model: us
     explore: woh
     type: looker_column
     fields: [woh.woh_tier, woh.count_sku]
@@ -66,7 +66,7 @@
     height: 6
   - title: 2nd Tier [11-30]
     name: 2nd Tier [11-30]
-    model: test_vu
+    model: us
     explore: woh
     type: looker_column
     fields: [woh.woh_tier, woh.count_sku]
@@ -127,7 +127,7 @@
     height: 6
   - title: 3rd Tier [31-100]
     name: 3rd Tier [31-100]
-    model: test_vu
+    model: us
     explore: woh
     type: looker_column
     fields: [woh.woh_tier, woh.count_sku]
@@ -188,7 +188,7 @@
     height: 6
   - title: Bot Tier [101, inf]
     name: Bot Tier [101, inf]
-    model: test_vu
+    model: us
     explore: woh
     type: looker_column
     fields: [woh.woh_tier, woh.count_sku]
@@ -249,7 +249,7 @@
     height: 6
   - title: Tier 1 - Top 10 Data
     name: Tier 1 - Top 10 Data
-    model: test_vu
+    model: us
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
@@ -355,7 +355,7 @@
     height: 6
   - title: 2nd Tier [11-30] Data
     name: 2nd Tier [11-30] Data
-    model: test_vu
+    model: us
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
@@ -444,7 +444,7 @@
     height: 10
   - title: 3rd Tier [31-100] 38m ago
     name: 3rd Tier [31-100] 38m ago
-    model: test_vu
+    model: us
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
@@ -533,7 +533,7 @@
     height: 10
   - title: Bot Tier [101, inf]
     name: Bot Tier [101, inf] (2)
-    model: test_vu
+    model: us
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,

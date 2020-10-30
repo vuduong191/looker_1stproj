@@ -1,6 +1,6 @@
 # If necessary, uncomment the line below to include explore_source.
 
-# include: "test_vu.model.lkml"
+# include: "us.model.lkml"
 
 view: affiliate_pub_placement_vs_non_2 {
   derived_table: {

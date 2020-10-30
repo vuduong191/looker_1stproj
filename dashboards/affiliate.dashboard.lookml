@@ -10,7 +10,7 @@
 
   - name: date_aggregation
     type: field_filter
-    model: test_vu
+    model: us
     explore: ga_channel_us
     field: ga_channel_us.timeframe_picker
     default_value: "Week"
@@ -26,7 +26,7 @@
     title_text: Traffic and Conversion Rate
   - name: click_cr_us
     title: Clicks and CR - US
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_measures.conversion_rate,
@@ -83,7 +83,7 @@
     width: 12
   - name: click_cr_au
     title: Clicks and CR - AU
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_measures.conversion_rate,
@@ -151,7 +151,7 @@
 
   - name: order_aov_us
     title: Orders and AOV - US
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.orders,
@@ -207,7 +207,7 @@
     width: 12
   - name: order_aov_au
     title: Order and AOV AU (AUD)
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.orders,
@@ -273,7 +273,7 @@
     # body_text: body text
   - name: rev_com_us
     title: Revenue and Commission - US
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.total_commission,
@@ -330,7 +330,7 @@
     width: 12
   - name: rev_com_au
     title: Revenue and Commission - AU (AUD)
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.total_commission,
@@ -397,7 +397,7 @@
     # body_text: body text
   - name: roas_cac_us
     title: ROAS and CAC US
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.total_commission,
@@ -464,7 +464,7 @@
     width: 12
   - name: roas_cac_au
     title: ROAS and CAC AU
-    model: test_vu
+    model: us
     explore: affiliate_publisher_performance
     type: looker_line
     fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.total_commission,
@@ -541,7 +541,7 @@
   #   # body_text: body text
   # - name: placement_offer_pub_us
   #   title: Revenue - US
-  #   model: test_vu
+  #   model: us
   #   explore: affiliate_publisher_performance
   #   type: looker_line
   #   fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.sales,
@@ -600,7 +600,7 @@
   #   width: 12
   # - name: placement_offer_pub_au
   #   title: Revenue - AU (AUD)
-  #   model: test_vu
+  #   model: us
   #   explore: affiliate_publisher_performance
   #   type: looker_line
   #   fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.sales,
@@ -659,7 +659,7 @@
   #   width: 12
   # - name: placement_pub_cr_us
   #   title: CR - US
-  #   model: test_vu
+  #   model: us
   #   explore: affiliate_publisher_performance
   #   type: looker_line
   #   fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.pub_name,
@@ -718,7 +718,7 @@
   #   width: 12
   # - name: placement_pub_cr_au
   #   title: CR - AU
-  #   model: test_vu
+  #   model: us
   #   explore: affiliate_publisher_performance
   #   type: looker_line
   #   fields: [affiliate_publisher_performance.dynamic_timeframe, affiliate_publisher_performance.pub_name,

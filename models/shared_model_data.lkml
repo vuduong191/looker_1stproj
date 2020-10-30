@@ -1,9 +1,8 @@
-connection: "klaviyo"
+
 
 # include all the views
 include: "/views/**/*.view"
-include: "/dashboards/*.dashboard"
-datagroup: test_vu_default_datagroup {
+datagroup: us_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
@@ -12,7 +11,7 @@ datagroup: daily_datagroup {
   max_cache_age: "25 hours"
 }
 
-persist_with: test_vu_default_datagroup
+persist_with: us_default_datagroup
 
 
 explore: order {
@@ -54,73 +53,73 @@ explore: order_line {
   join: countries {
     relationship: one_to_one
     sql:    ;;
-  }
-  join: order {
-    type: left_outer
-    relationship: many_to_one
-    view_label: "Order"
-    fields: [order.created_date, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id]
-    sql_on: ${order.id}=${order_line.order_id} ;;
-  }
+}
+join: order {
+  type: left_outer
+  relationship: many_to_one
+  view_label: "Order"
+  fields: [order.created_date, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id]
+  sql_on: ${order.id}=${order_line.order_id} ;;
+}
 
-  join: order_tag {
-    view_label: "Order Line"
-    type: left_outer
-    relationship: one_to_many
-    sql_on: ${order_line.order_id} = ${order_tag.pk2_order_id} ;;
-    fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
-  }
-  join: order_is_marketing {
-    view_label: "Order Line"
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${order_line.id} = ${order_is_marketing.id} ;;
-  }
-  join: order_is_b2b {
-    view_label: "Order Line"
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${order_line.id} = ${order_is_b2b.id} ;;
-  }
-  join: product {
-    view_label: "Order Line"
-    relationship: many_to_one
-    sql_on: ${order_line.product_id}=${product.id} ;;
-  }
-  join: vu_product_data_us {
-    type: left_outer
-    view_label: "Manual Data"
-    relationship: many_to_one
-    sql_on: ${order_line.sku}=${vu_product_data_us.product_variant_sku} ;;
-  }
-  join: inventory_week_active {
-    relationship: many_to_one
-    sql_on: ${order.created_week} = ${inventory_week_active.day_week}
+join: order_tag {
+  view_label: "Order Line"
+  type: left_outer
+  relationship: one_to_many
+  sql_on: ${order_line.order_id} = ${order_tag.pk2_order_id} ;;
+  fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
+}
+join: order_is_marketing {
+  view_label: "Order Line"
+  type: left_outer
+  relationship: one_to_one
+  sql_on: ${order_line.id} = ${order_is_marketing.id} ;;
+}
+join: order_is_b2b {
+  view_label: "Order Line"
+  type: left_outer
+  relationship: one_to_one
+  sql_on: ${order_line.id} = ${order_is_b2b.id} ;;
+}
+join: product {
+  view_label: "Order Line"
+  relationship: many_to_one
+  sql_on: ${order_line.product_id}=${product.id} ;;
+}
+join: vu_product_data_us {
+  type: left_outer
+  view_label: "Manual Data"
+  relationship: many_to_one
+  sql_on: ${order_line.sku}=${vu_product_data_us.product_variant_sku} ;;
+}
+join: inventory_week_active {
+  relationship: many_to_one
+  sql_on: ${order.created_week} = ${inventory_week_active.day_week}
     AND ${order_line.sku} = ${inventory_week_active.sku};;
-  }
-  join: customer {
-    relationship: many_to_one
-    sql_on: ${customer.id} = ${order.customer_id} ;;
-    fields: [id, count, first_name, last_name, created_date, created_month, tax_exempt, verified_email,
-      state, orders_count, accepts_marketing, percent_returning, is_returning_customer, average_actual_ltv]
-  }
+}
+join: customer {
+  relationship: many_to_one
+  sql_on: ${customer.id} = ${order.customer_id} ;;
+  fields: [id, count, first_name, last_name, created_date, created_month, tax_exempt, verified_email,
+    state, orders_count, accepts_marketing, percent_returning, is_returning_customer, average_actual_ltv]
+}
 
 # This view adds only one additional field; the first order date!
-  join: customer_first_order {
-    relationship: many_to_one
-    sql_on: ${order.id} = ${customer_first_order.min_order_id} ;;
-  }
+join: customer_first_order {
+  relationship: many_to_one
+  sql_on: ${order.id} = ${customer_first_order.min_order_id} ;;
+}
 # This view adds important dimensions like the number of days since the first order
-  join: order_customer_dimensions {
-    view_label: "Order"
-    relationship: one_to_one
-    sql:   ;;
-  }
-  join: first_order_product_types {
-    relationship: many_to_one
-    view_label: "Customer"
-    sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;
-  }
+join: order_customer_dimensions {
+  view_label: "Order"
+  relationship: one_to_one
+  sql:   ;;
+}
+join: first_order_product_types {
+  relationship: many_to_one
+  view_label: "Customer"
+  sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;
+}
 }
 
 explore: inventory_level {
@@ -129,16 +128,16 @@ explore: inventory_level {
   join: countries {
     relationship: one_to_one
     sql:    ;;
-  }
-  hidden: yes
-  join: product_variant {
-    relationship: many_to_one
-    sql_on: ${product_variant.inventory_item_id}=${inventory_level.inventory_item_id} ;;
-  }
-  join: product {
-    relationship: many_to_one
-    sql_on: ${product_variant.product_id} = ${product.id}  ;;
-  }
+}
+hidden: yes
+join: product_variant {
+  relationship: many_to_one
+  sql_on: ${product_variant.inventory_item_id}=${inventory_level.inventory_item_id} ;;
+}
+join: product {
+  relationship: many_to_one
+  sql_on: ${product_variant.product_id} = ${product.id}  ;;
+}
 }
 
 explore: product_variant {
@@ -148,51 +147,43 @@ explore: product_variant {
     relationship: one_to_one
     sql:    ;;
 }
-  join: vu_product_data_us {
-    type: left_outer
-    view_label: "Manual Data"
-    relationship: many_to_one
-    sql_on: ${product_variant.sku}=${vu_product_data_us.product_variant_sku} ;;
-  }
-  join: weeks {
-    type: cross
-    relationship: many_to_many
-  }
-  join: avg_weekly_sales_1 {
-    type: left_outer
-    relationship: one_to_many
-    # sql: left join
-    # {% if countries.country._parameter_value == 'AU' %}
-    # ${avg_weekly_sales_1_au.SQL_TABLE_NAME}
-    # {% else %}
-    # ${avg_weekly_sales_1.SQL_TABLE_NAME}
-    # {% endif %}
-    # as avg_weekly_sales_1 on ${product_variant.sku} = ${avg_weekly_sales_1.sku} ;;
+join: vu_product_data_us {
+  type: left_outer
+  view_label: "Manual Data"
+  relationship: many_to_one
+  sql_on: ${product_variant.sku}=${vu_product_data_us.product_variant_sku} ;;
+}
+join: weeks {
+  type: cross
+  relationship: many_to_many
+}
+join: avg_weekly_sales_1 {
+  from: avg_weekly_sales_1_switchable
+  type: left_outer
+  relationship: one_to_many
+  sql_on: ${product_variant.sku} = ${avg_weekly_sales_1.sku} ;;
 
-    sql: left join
-
-      ${avg_weekly_sales_1.SQL_TABLE_NAME}
-
-    as avg_weekly_sales_1 on ${product_variant.sku} = ${avg_weekly_sales_1.sku} ;;
-  }
-  join: avg_weekly_sales_by_category {
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${vu_product_data_us.category} = ${avg_weekly_sales_by_category.category} AND
+}
+join: avg_weekly_sales_by_category {
+  from: avg_weekly_sales_by_category_switchable
+  type: left_outer
+  relationship: many_to_one
+  sql_on: ${vu_product_data_us.category} = ${avg_weekly_sales_by_category.category} AND
     ${weeks.created_week} = ${avg_weekly_sales_by_category.created_week}
     ;;
-  }
-  join: avg_weekly_sales_derived {
-    relationship: one_to_one
-    sql:   ;;
-  }
+}
+join: avg_weekly_sales_derived {
+  relationship: one_to_one
+  sql:   ;;
+}
 
-  join: avg_weekly_sales_2 {
-    type: left_outer
-    relationship: many_to_one
-    view_label: "L12W Data"
-    sql_on: ${product_variant.sku}=${avg_weekly_sales_2.sku} ;;
-  }
+join: avg_weekly_sales_2 {
+  from: avg_weekly_sales_2_switchable
+  type: left_outer
+  relationship: many_to_one
+  view_label: "L12W Data"
+  sql_on: ${product_variant.sku}=${avg_weekly_sales_2.sku} ;;
+}
 }
 
 explore: inventory_snapshot {
@@ -202,14 +193,14 @@ explore: inventory_snapshot {
     relationship: one_to_one
     sql:    ;;
 }
-  join: product_variant {
-    relationship: many_to_one
-    sql_on: ${inventory_snapshot.inventory_item_id} = ${product_variant.inventory_item_id} ;;
-  }
-  join: product {
-    relationship: many_to_one
-    sql_on: ${product_variant.product_id} = ${product.id} ;;
-  }
+join: product_variant {
+  relationship: many_to_one
+  sql_on: ${inventory_snapshot.inventory_item_id} = ${product_variant.inventory_item_id} ;;
+}
+join: product {
+  relationship: many_to_one
+  sql_on: ${product_variant.product_id} = ${product.id} ;;
+}
 }
 explore: avg_spent_by_state {
   always_filter: { filters: [countries.country: "US"]}
@@ -220,6 +211,7 @@ explore: avg_spent_by_state {
 }
 }
 explore: avg_weekly_sales_2 {
+  from: avg_weekly_sales_2_switchable
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
   join: countries {
@@ -228,19 +220,21 @@ explore: avg_weekly_sales_2 {
 }
 }
 explore: avg_weekly_sales_1 {
+  from: avg_weekly_sales_1_switchable
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
   join: countries {
     relationship: one_to_one
     sql:    ;;
 }
-  join: avg_weekly_sales_2 {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${avg_weekly_sales_1.sku}=${avg_weekly_sales_2.sku} ;;
-    fields: [avg_weekly_sales_2.rank_group_l12w]
-    view_label: "L12W Data"
-  }
+join: avg_weekly_sales_2 {
+  from: avg_weekly_sales_2_switchable
+  type: left_outer
+  relationship: one_to_one
+  sql_on: ${avg_weekly_sales_1.sku}=${avg_weekly_sales_2.sku} ;;
+  fields: [avg_weekly_sales_2.rank_group_l12w]
+  view_label: "L12W Data"
+}
 
 }
 
@@ -282,7 +276,7 @@ explore: affiliate_daily_performance_us {
     view_label: "Affiliate Metrics"
     relationship: one_to_one
     sql:   ;;
-  }
+}
 }
 explore: ga_channel_performance_us {}
 explore: ga_channel_performance_au {}
@@ -292,7 +286,7 @@ explore: ga_channel_us {
     view_label: "Calculated Metrics"
     relationship: one_to_one
     sql:   ;;
-  }
+}
 }
 explore: bing_daily_us {}
 explore: cac_us {
@@ -308,7 +302,7 @@ explore: affiliate_publisher_performance {
     view_label: "Calculated Metrics"
     relationship: one_to_one
     sql:   ;;
-  }
+}
 }
 explore: affiliate_performance_us_au {
   join: placement_payment {
@@ -385,7 +379,7 @@ explore: inventory_snapshot_switchable {
   join: countries {
     relationship: one_to_one
     sql:    ;;
-  }
+}
 }
 
 

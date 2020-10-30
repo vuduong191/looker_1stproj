@@ -10,14 +10,14 @@
 
   - name: date_aggregation
     type: field_filter
-    model: test_vu
+    model: us
     explore: ga_channel_us
     field: ga_channel_us.timeframe_picker
     default_value: "Week"
 
   - name: major_channel_only
     type: field_filter
-    model: test_vu
+    model: us
     explore: ga_channel_us
     field: ga_channel_us.major_channel
     default_value: "Yes"
@@ -25,7 +25,7 @@
   elements:
   - name: traffic_channel_type
     title: Traffic - Paid vs Non-Paid
-    model: test_vu
+    model: us
     explore: ga_channel_us
     type: looker_line
     fields: [ga_channel_us.dynamic_timeframe, ga_channel_us.sessions, ga_channel_us.channel_type]
@@ -75,7 +75,7 @@
     width: 12
   - name: conversion_rate_us
     title: Conversion Rate - Paid vs Non-Paid
-    model: test_vu
+    model: us
     explore: ga_channel_us
     type: looker_line
     fields: [ga_channel_us.dynamic_timeframe, ga_channel_us.channel_type, ga_us_channel_measures.conversion_rate]
@@ -145,7 +145,7 @@
 
   - name: traffic_us
     title: Traffic
-    model: test_vu
+    model: us
     explore: ga_channel_us
     type: looker_line
     fields: [ga_channel_us.dynamic_timeframe, ga_channel_us.channel_grouping, ga_channel_us.sessions]
@@ -196,7 +196,7 @@
     width: 16
   - name: traffic_channel_pie
     title: Traffic Contribution
-    model: test_vu
+    model: us
     explore: ga_channel_us
     type: looker_pie
     fields: [ga_channel_us.sessions, ga_channel_us.channel_grouping]
@@ -266,7 +266,7 @@
     width: 8
   - name: paid_channel
     title: CR - Paid Channel
-    model: test_vu
+    model: us
     explore: ga_channel_us
     type: looker_line
     fields: [ga_channel_us.dynamic_timeframe, ga_us_channel_measures.conversion_rate,
@@ -351,7 +351,7 @@
     width: 12
   - name: non_paid_channel
     title: CR - Non-Paid Channel
-    model: test_vu
+    model: us
     explore: ga_channel_us
     type: looker_line
     fields: [ga_channel_us.dynamic_timeframe, ga_us_channel_measures.conversion_rate,
@@ -442,7 +442,7 @@
     # body_text: body text
   - name: affiliate_pay_rev_us
     title: Spend and Revenue - US
-    model: test_vu
+    model: us
     explore: affiliate_pub_placement_vs_non_2
     type: looker_line
     fields: [affiliate_pub_placement_vs_non_2.dynamic_timeframe, affiliate_pub_placement_vs_non_2.fee_and_com_total,
@@ -502,7 +502,7 @@
     width: 12
   - name: affiliate_pay_rev_au
     title: Spend and Revenue - AU
-    model: test_vu
+    model: us
     explore: affiliate_pub_placement_vs_non_2
     type: looker_line
     fields: [affiliate_pub_placement_vs_non_2.dynamic_timeframe, affiliate_pub_placement_vs_non_2.fee_and_com_total,
@@ -562,7 +562,7 @@
     width: 12
   # - name: order_cac_aff_us
   #   title: Order and CAC US
-  #   model: test_vu
+  #   model: us
   #   explore: affiliate_pub_placement_vs_non_us
   #   type: looker_line
   #   fields: [affiliate_pub_placement_vs_non_us.dynamic_timeframe, affiliate_final_measures.cac,
