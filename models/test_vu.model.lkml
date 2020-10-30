@@ -142,7 +142,7 @@ explore: inventory_level {
 }
 
 explore: product_variant {
-  always_filter: { filters: [countries.country: "US"]}
+  always_filter: { filters: [countries.country: "AU"]}
   always_join: [countries]
   join: countries {
     relationship: one_to_one
@@ -161,7 +161,19 @@ explore: product_variant {
   join: avg_weekly_sales_1 {
     type: left_outer
     relationship: one_to_many
-    sql_on: ${product_variant.sku} = ${avg_weekly_sales_1.sku} ;;
+    # sql: left join
+    # {% if countries.country._parameter_value == 'AU' %}
+    # ${avg_weekly_sales_1_au.SQL_TABLE_NAME}
+    # {% else %}
+    # ${avg_weekly_sales_1.SQL_TABLE_NAME}
+    # {% endif %}
+    # as avg_weekly_sales_1 on ${product_variant.sku} = ${avg_weekly_sales_1.sku} ;;
+
+    sql: left join
+
+      ${avg_weekly_sales_1.SQL_TABLE_NAME}
+
+    as avg_weekly_sales_1 on ${product_variant.sku} = ${avg_weekly_sales_1.sku} ;;
   }
   join: avg_weekly_sales_by_category {
     type: left_outer
