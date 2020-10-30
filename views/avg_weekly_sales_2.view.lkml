@@ -1,5 +1,6 @@
 view: avg_weekly_sales_2 {
     derived_table: {
+      publish_as_db_view: yes
       sql_trigger_value: SELECT EXTRACT(WEEK FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL -60 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
       explore_source: avg_weekly_sales_1 {
         column: sku {}
