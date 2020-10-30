@@ -379,3 +379,4 @@ explore: inventory_snapshot_switchable {
 
 # include channel
 explore: ga_affiliate_traffic_order_us {}
+explore: ga_paid_social_traffic_order_us {}
