@@ -25,6 +25,7 @@ view: woh {
           value: "-NULL"
         }
       }
+      sql_trigger_value: SELECT EXTRACT(DATE FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL -60 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
     }
     dimension: sku {}
     dimension: inventory_quantity {
