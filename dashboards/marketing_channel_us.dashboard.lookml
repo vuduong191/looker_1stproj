@@ -440,21 +440,18 @@
     title_text: Affiliate
     # subtitle_text: subtitle text
     # body_text: body text
-  - name: affiliate_pay_rev_us
-    title: Spend and Revenue - US
+  - name: affiliate_rev_spend
+    title: Revenue and Spend
     model: us
-    explore: affiliate_pub_placement_vs_non_2
+    explore: affiliate_pub_placement_vs_non_us
     type: looker_line
-    fields: [affiliate_pub_placement_vs_non_2.dynamic_timeframe, affiliate_pub_placement_vs_non_2.fee_and_com_total,
-      affiliate_pub_placement_vs_non_2.revenue]
+    fields: [affiliate_pub_placement_vs_non_us.dynamic_timeframe, affiliate_pub_placement_vs_non_us.revenue_total,
+      affiliate_pub_placement_vs_non_us.fee_and_com_total_total]
     listen:
-      date_aggregation: affiliate_pub_placement_vs_non_2.timeframe_picker
-      date: affiliate_pub_placement_vs_non_2.transaction_date
-    filters:
-      affiliate_pub_placement_vs_non_2.market: us
-    sorts: [affiliate_pub_placement_vs_non_2.dynamic_timeframe]
+      date_aggregation: affiliate_pub_placement_vs_non_us.timeframe_picker
+      date: affiliate_pub_placement_vs_non_us.transaction_date
+    sorts: [affiliate_pub_placement_vs_non_us.dynamic_timeframe]
     limit: 500
-    column_limit: 50
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -480,16 +477,14 @@
     y_axis_combined: true
     show_null_points: true
     interpolation: linear
-    y_axes: [{label: '', orientation: left, series: [{axisId: affiliate_pub_placement_vs_non_2.fee_and_com_total,
-            id: affiliate_pub_placement_vs_non_2.fee_and_com_total, name: Fee and Com
-              Total, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-            __LINE_NUM: 482}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-        __LINE_NUM: 482}, {label: !!null '', orientation: right, series: [{axisId: affiliate_pub_placement_vs_non_2.revenue,
-            id: affiliate_pub_placement_vs_non_2.revenue, name: Revenue, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-            __LINE_NUM: 486}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-        __LINE_NUM: 485}]
+    y_axes: [{label: '', orientation: left, series: [{axisId: affiliate_pub_placement_vs_non_us.revenue_total,
+            id: affiliate_pub_placement_vs_non_us.revenue_total, name: Revenue Total}],
+        showLabels: true, showValues: true, unpinAxis: false, tickDensity: default,
+        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
+        series: [{axisId: affiliate_pub_placement_vs_non_us.fee_and_com_total_total,
+            id: affiliate_pub_placement_vs_non_us.fee_and_com_total_total, name: Fee
+              and Com Total Total}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 5, type: linear}]
     series_types: {}
     ordering: none
     show_null_labels: false
@@ -500,21 +495,19 @@
     row: 30
     col: 0
     width: 12
-  - name: affiliate_pay_rev_au
-    title: Spend and Revenue - AU
+  - name: traffic_order
+    title: Traffic and Orders
     model: us
-    explore: affiliate_pub_placement_vs_non_2
+    explore: affiliate_pub_placement_vs_non_us
     type: looker_line
-    fields: [affiliate_pub_placement_vs_non_2.dynamic_timeframe, affiliate_pub_placement_vs_non_2.fee_and_com_total,
-      affiliate_pub_placement_vs_non_2.revenue]
+    fields: [affiliate_pub_placement_vs_non_us.dynamic_timeframe, affiliate_pub_placement_vs_non_us.ga_order_count,
+      affiliate_pub_placement_vs_non_us.order_count_total, affiliate_pub_placement_vs_non_us.click_count_total,
+      affiliate_pub_placement_vs_non_us.ga_session_count]
     listen:
-      date_aggregation: affiliate_pub_placement_vs_non_2.timeframe_picker
-      date: affiliate_pub_placement_vs_non_2.transaction_date
-    filters:
-      affiliate_pub_placement_vs_non_2.market: au
-    sorts: [affiliate_pub_placement_vs_non_2.dynamic_timeframe]
+      date_aggregation: affiliate_pub_placement_vs_non_us.timeframe_picker
+      date: affiliate_pub_placement_vs_non_us.transaction_date
+    sorts: [affiliate_pub_placement_vs_non_us.dynamic_timeframe]
     limit: 500
-    column_limit: 50
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -540,17 +533,21 @@
     y_axis_combined: true
     show_null_points: true
     interpolation: linear
-    y_axes: [{label: '', orientation: left, series: [{axisId: affiliate_pub_placement_vs_non_2.fee_and_com_total,
-            id: affiliate_pub_placement_vs_non_2.fee_and_com_total, name: Fee and Com
-              Total, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-            __LINE_NUM: 482}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-        __LINE_NUM: 482}, {label: !!null '', orientation: right, series: [{axisId: affiliate_pub_placement_vs_non_2.revenue,
-            id: affiliate_pub_placement_vs_non_2.revenue, name: Revenue, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-            __LINE_NUM: 486}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear, __FILE: ettitude_vu01/dashboards/marketing_channel_us.dashboard.lookml,
-        __LINE_NUM: 485}]
+    y_axes: [{label: Traffic, orientation: left, series: [{axisId: affiliate_pub_placement_vs_non_us.click_count_total,
+            id: affiliate_pub_placement_vs_non_us.click_count_total, name: Click Count
+              Total}, {axisId: affiliate_pub_placement_vs_non_us.ga_session_count, id: affiliate_pub_placement_vs_non_us.ga_session_count,
+            name: GA Data Sessions}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, type: linear}, {label: Orders, orientation: right, series: [
+          {axisId: affiliate_pub_placement_vs_non_us.ga_order_count, id: affiliate_pub_placement_vs_non_us.ga_order_count,
+            name: GA Order}, {axisId: affiliate_pub_placement_vs_non_us.order_count_total,
+            id: affiliate_pub_placement_vs_non_us.order_count_total, name: Order Count
+              Total}], showLabels: true, showValues: true, maxValue: !!null '', unpinAxis: false,
+        tickDensity: custom, type: linear}]
     series_types: {}
+    series_colors:
+      affiliate_pub_placement_vs_non_us.ga_session_count: "#4276BE"
+      affiliate_pub_placement_vs_non_us.order_count_total: "#B1399E"
+      affiliate_pub_placement_vs_non_us.click_count_total: "#B32F37"
     ordering: none
     show_null_labels: false
     show_totals_labels: false
@@ -560,6 +557,143 @@
     row: 30
     col: 12
     width: 12
+  - name: cac
+    title: CAC Reported vs GA
+    model: us
+    explore: affiliate_pub_placement_vs_non_us
+    type: looker_line
+    fields: [affiliate_pub_placement_vs_non_us.dynamic_timeframe, affiliate_pub_placement_vs_non_us.order_count_total,
+      affiliate_pub_placement_vs_non_us.click_count_total, affiliate_pub_placement_vs_non_us.fee_and_com_total_total,
+      affiliate_pub_placement_vs_non_us.ga_order_count]
+    listen:
+      date_aggregation: affiliate_pub_placement_vs_non_us.timeframe_picker
+      date: affiliate_pub_placement_vs_non_us.transaction_date
+    sorts: [affiliate_pub_placement_vs_non_us.dynamic_timeframe]
+    limit: 500
+    dynamic_fields:
+    - table_calculation: reported_cac
+      label: Reported CAC
+      expression: "${affiliate_pub_placement_vs_non_us.fee_and_com_total_total}/${affiliate_pub_placement_vs_non_us.order_count_total}"
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      _type_hint: number
+    - table_calculation: ga_cac
+      label: GA CAC
+      expression: "${affiliate_pub_placement_vs_non_us.fee_and_com_total_total}/${affiliate_pub_placement_vs_non_us.ga_order_count}"
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      _type_hint: number
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    y_axes: [{label: '', orientation: left, series: [{axisId: reported_cac, id: reported_cac,
+            name: Reported CAC}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, type: linear}, {label: '', orientation: right, series: [
+          {axisId: ga_cac, id: ga_cac, name: GA CAC}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, type: linear}]
+    series_types: {}
+    series_colors:
+      affiliate_pub_placement_vs_non_us.ga_session_count: "#4276BE"
+      affiliate_pub_placement_vs_non_us.order_count_total: "#B1399E"
+      affiliate_pub_placement_vs_non_us.click_count_total: "#B32F37"
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_fields: [affiliate_pub_placement_vs_non_us.order_count_total, affiliate_pub_placement_vs_non_us.click_count_total,
+      affiliate_pub_placement_vs_non_us.fee_and_com_total_total, affiliate_pub_placement_vs_non_us.ga_order_count]
+
+    row: 39
+    col: 0
+    width: 12
+#   - name: traffic_order
+#     title: Traffic and Orders
+#     model: us
+#     explore: affiliate_pub_placement_vs_non_us
+#     type: looker_line
+#     fields: [affiliate_pub_placement_vs_non_us.dynamic_timeframe, affiliate_pub_placement_vs_non_us.ga_order_count,
+#       affiliate_pub_placement_vs_non_us.order_count_total, affiliate_pub_placement_vs_non_us.click_count_total,
+#       affiliate_pub_placement_vs_non_us.ga_session_count]
+#     listen:
+#       date_aggregation: affiliate_pub_placement_vs_non_us.timeframe_picker
+#       date: affiliate_pub_placement_vs_non_us.transaction_date
+#     sorts: [affiliate_pub_placement_vs_non_us.dynamic_timeframe]
+#     limit: 500
+#     query_timezone: America/Los_Angeles
+#     x_axis_gridlines: false
+#     y_axis_gridlines: true
+#     show_view_names: false
+#     show_y_axis_labels: true
+#     show_y_axis_ticks: true
+#     y_axis_tick_density: default
+#     y_axis_tick_density_custom: 5
+#     show_x_axis_label: true
+#     show_x_axis_ticks: true
+#     y_axis_scale_mode: linear
+#     x_axis_reversed: false
+#     y_axis_reversed: false
+#     plot_size_by_field: false
+#     trellis: ''
+#     stacking: ''
+#     limit_displayed_rows: false
+#     legend_position: center
+#     point_style: none
+#     show_value_labels: true
+#     label_density: 25
+#     x_axis_scale: auto
+#     y_axis_combined: true
+#     show_null_points: true
+#     interpolation: linear
+#     y_axes: [{label: Traffic, orientation: left, series: [{axisId: affiliate_pub_placement_vs_non_us.click_count_total,
+#             id: affiliate_pub_placement_vs_non_us.click_count_total, name: Click Count
+#               Total}, {axisId: affiliate_pub_placement_vs_non_us.ga_session_count, id: affiliate_pub_placement_vs_non_us.ga_session_count,
+#             name: GA Data Sessions}], showLabels: true, showValues: true, unpinAxis: false,
+#         tickDensity: default, type: linear}, {label: Orders, orientation: right, series: [
+#           {axisId: affiliate_pub_placement_vs_non_us.ga_order_count, id: affiliate_pub_placement_vs_non_us.ga_order_count,
+#             name: GA Order}, {axisId: affiliate_pub_placement_vs_non_us.order_count_total,
+#             id: affiliate_pub_placement_vs_non_us.order_count_total, name: Order Count
+#               Total}], showLabels: true, showValues: true, maxValue: !!null '', unpinAxis: false,
+#         tickDensity: custom, type: linear}]
+#     series_types: {}
+#     series_colors:
+#       affiliate_pub_placement_vs_non_us.ga_session_count: "#4276BE"
+#       affiliate_pub_placement_vs_non_us.order_count_total: "#B1399E"
+#       affiliate_pub_placement_vs_non_us.click_count_total: "#B32F37"
+#     ordering: none
+#     show_null_labels: false
+#     show_totals_labels: false
+#     show_silhouette: false
+#     totals_color: "#808080"
+#     defaults_version: 1
+#     row: 39
+#     col: 12
+#     width: 12
   # - name: order_cac_aff_us
   #   title: Order and CAC US
   #   model: us
