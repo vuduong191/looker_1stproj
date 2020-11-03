@@ -1,5 +1,6 @@
 view: woh {
     derived_table: {
+      publish_as_db_view: yes
       explore_source: product_variant {
         column: sku {}
         column: inventory_quantity {}
