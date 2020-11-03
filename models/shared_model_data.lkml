@@ -264,6 +264,7 @@ explore: order_is_b2b {
 }
 }
 explore: woh {
+  from: woh_switchable
   always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
   join: countries {
