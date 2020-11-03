@@ -17,28 +17,28 @@
       options:
       - US
       - AU
-    explore: woh
+    explore: woh_switchable
     model: us
     field: countries.country
   elements:
-  - name: pj_burndown_woh
+  - name: pj_burndown_woh_switchable
     title: PJ Burndown
     model: us
-    explore: woh
+    explore: woh_switchable
     type: looker_grid
-    fields: [woh.category, woh.product, woh.color, woh.material, woh.sum_inventory,
-      woh.sum_weekly_unit_sold, woh.size]
-    pivots: [woh.size]
+    fields: [woh_switchable.category, woh_switchable.product, woh_switchable.color, woh_switchable.material, woh_switchable.sum_inventory,
+      woh_switchable.sum_weekly_unit_sold, woh_switchable.size]
+    pivots: [woh_switchable.size]
     listen:
       country_filter: countries.country
     filters:
-      woh.category: '"Men''s Wear","Women''s wear"'
-    sorts: [woh.size 0, woh.category, woh.product, woh.color]
+      woh_switchable.category: '"Men''s Wear","Women''s wear"'
+    sorts: [woh_switchable.size 0, woh_switchable.category, woh_switchable.product, woh_switchable.color]
     limit: 500
     dynamic_fields:
-    - table_calculation: woh
-      label: WOH
-      expression: "${woh.sum_inventory}/${woh.sum_weekly_unit_sold}"
+    - table_calculation: woh_switchable
+      label: woh_switchable
+      expression: "${woh_switchable.sum_inventory}/${woh_switchable.sum_weekly_unit_sold}"
       value_format:
       value_format_name: decimal_1
       _kind_hint: measure
@@ -63,17 +63,17 @@
     show_totals: true
     show_row_totals: true
     series_cell_visualizations:
-      woh.sum_inventory:
+      woh_switchable.sum_inventory:
         is_active: false
-      woh:
+      woh_switchable:
         is_active: true
     series_value_format:
-      woh:
+      woh_switchable:
         name: decimal_1
         format_string: "#,##0.0"
         label: Decimals (1)
     defaults_version: 1
-    hidden_fields: [woh.sum_weekly_unit_sold]
+    hidden_fields: [woh_switchable.sum_weekly_unit_sold]
     row: 0
     col: 0
     width: 24
