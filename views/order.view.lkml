@@ -383,6 +383,10 @@ view: order {
     type: string
     sql: ${TABLE}.source_name ;;
   }
+  dimension: online_order {
+    type: yesno
+    sql: ${TABLE}.source_name="web" OR ${TABLE}.source_name="580111";;
+  }
 
   dimension: subtotal_price {
     type: number
