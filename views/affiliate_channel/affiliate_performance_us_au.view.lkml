@@ -13,7 +13,17 @@ view: affiliate_performance_us_au {
     sql_trigger_value: SELECT EXTRACT(DATE FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL -60 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
   }
 
-  dimension: transaction_date {
+  dimension: pk {
+    primary_key: yes
+    type: string
+    hidden: yes
+    sql: ${pub_id} || ' ' || ${transaction_date} || ' ' || ${market} ;;
+  }
+
+  dimension_group: transaction {
+    type: time
+    timeframes: [date,month,year,raw]
+    datatype: date
     sql: ${TABLE}.transaction_date ;;
   }
 

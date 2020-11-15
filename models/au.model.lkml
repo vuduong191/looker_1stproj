@@ -24,8 +24,6 @@ explore: +bing_daily_us {                       hidden:yes }
 explore: +cac_us {                              hidden:yes }
 explore: +affiliate_publisher_performance {     hidden:yes }
 explore: +affiliate_performance_us_au {         hidden:yes }
-explore: +affiliate_performance_us_only {       hidden:yes }
-explore: +affiliate_performance_us_au_2 {       hidden:yes }
 explore: +inventory_week_active {               hidden:yes }
 explore: +inventory_snapshot_us {               hidden:yes }
 explore: +affiliate_pub_placement_vs_non {      hidden:yes }

@@ -11,14 +11,22 @@ view: ga_affiliate_traffic_order_au {
       }
     }
   }
+
+  dimension: pk {
+    primary_key: yes
+    type: date
+    sql: ${date_date} ;;
+    hidden: yes
+  }
+
   dimension_group: date {
     type: time
-    timeframes: [raw, date, week, month, year]
+    timeframes: [date, week, month, year, raw]
     datatype: date
     sql: ${TABLE}.date_raw ;;
   }
-  # dimension: sessions {}
-  # dimension: transactions {}
+  dimension: sessions {}
+  dimension: transactions {}
   measure: session_count {
     type: sum
     sql: ${TABLE}.sessions ;;

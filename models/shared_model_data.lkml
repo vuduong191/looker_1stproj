@@ -325,27 +325,32 @@ explore: affiliate_performance_us_au {
     fields: [placement_payment.placement_amount,placement_payment.placement_day]
   }
 }
-explore: affiliate_performance_us_only {}
-# explore: affiliate_performance_us_au_2 {
-#   join: ga_affiliate_traffic_order_us {
-#     view_label: "GA Data"
-#     relationship: many_to_one
-#     type: left_outer
-#     sql_on: ${affiliate_performance_us_au_2.market} = "us" AND
-#       ${affiliate_performance_us_au_2.transaction_date} = ${ga_affiliate_traffic_order_us.date_date}
-#       ;;
-#   }
-# }
 
-explore: affiliate_performance_us_au_2 {
+explore: affiliate_performance_us_au_test {
+  from: affiliate_performance_us_au
   join: ga_affiliate_traffic_order_us {
-    view_label: "GA Data"
-    relationship: one_to_one
+    view_label: "GA Data US"
+    relationship: many_to_one
     type: left_outer
-    sql_on: ${affiliate_performance_us_au_2.market} = "us" AND
-      ${affiliate_performance_us_au_2.transaction_date} = ${ga_affiliate_traffic_order_us.date_date}
+    sql_on: ${affiliate_performance_us_au_test.market} = "us" AND
+      ${affiliate_performance_us_au_test.transaction_raw} = ${ga_affiliate_traffic_order_us.date_raw}
       ;;
   }
+
+# TODO:  Uncomment this once the base table for ga_affiliate_traffic_order_au.view exists.
+  # join: ga_affiliate_traffic_order_au {
+  #   view_label: "GA Data AU"
+  #   relationship: many_to_one
+  #   type: left_outer
+  #   sql_on: ${affiliate_performance_us_au_test.market} = "au" AND
+  #     ${affiliate_performance_us_au_test.transaction_raw} = ${ga_affiliate_traffic_order_au.date_raw}
+  #     ;;
+  # }
+
+  # join: ga_affiliate_traffic_order_au_us {
+  #   relationship: one_to_one
+  #   sql:    ;;
+  # }
 }
 
 explore: inventory_week_active {}
