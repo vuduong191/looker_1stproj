@@ -142,7 +142,7 @@ join: product {
 }
 
 explore: product_variant {
-  always_filter: { filters: [countries.country: "AU"]}
+  always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
   join: countries {
     relationship: one_to_one
