@@ -7,7 +7,7 @@ datagroup: us_default_datagroup {
   max_cache_age: "1 hour"
 }
 datagroup: daily_datagroup {
-  sql_trigger:   SELECT cast(CURRENT_DATE as string); ;;
+  sql_trigger:   SELECT cast(CURRENT_DATE as string) ;;
   max_cache_age: "25 hours"
 }
 
@@ -142,7 +142,7 @@ join: product {
 }
 
 explore: product_variant {
-  always_filter: { filters: [countries.country: "AU"]}
+  always_filter: { filters: [countries.country: "US"]}
   always_join: [countries]
   join: countries {
     relationship: one_to_one
