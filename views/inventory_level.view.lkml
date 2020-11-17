@@ -24,6 +24,7 @@ view: inventory_level {
   dimension: inventory_item_id {
     type: number
     # hidden: yes
+    primary_key: yes
     sql: ${TABLE}.inventory_item_id ;;
   }
 
@@ -49,5 +50,10 @@ view: inventory_level {
   measure: count {
     type: count
     drill_fields: [inventory_item.id]
+  }
+  measure: current_inventory {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${available} ;;
   }
 }

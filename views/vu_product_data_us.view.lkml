@@ -26,6 +26,24 @@ view: vu_product_data_us {
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    order_by_field: category_order
+  }
+
+  dimension: category_order {
+    type: number
+    sql: case substr(${category},0,3)
+      when 'Bed' then 1
+      when 'Bat' then 2
+      when 'Wom' then 3
+      when 'Men' then 4
+      when 'Bab' then 5
+      when 'Acc' then 6
+      else 100
+      end;;
+  }
+
+  dimension: all {
+    sql: "All" ;;
   }
 
   dimension: color {

@@ -121,6 +121,21 @@ join: first_order_product_types {
   view_label: "Customer"
   sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;
 }
+
+join: product_variant {
+  relationship: many_to_one
+  view_label: "Inventory Week Active"
+  sql_on: ${product_variant.sku} = ${order_line.sku} ;;
+  fields: [inventory_item_id]
+}
+
+join: inventory_level {
+  view_label: "Inventory Week Active"
+  relationship: many_to_one
+  sql_on: ${product_variant.inventory_item_id}=${inventory_level.inventory_item_id} ;;
+  fields: [inventory_level.available, inventory_level.current_inventory]
+}
+
 }
 
 explore: inventory_level {

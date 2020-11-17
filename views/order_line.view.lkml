@@ -1,13 +1,29 @@
+include: "./_period_comparison.view"
+
 view: order_line {
   sql_table_name: `@{schema}.order_line`
     ;;
   drill_fields: [id, order.name, price, order_id]
+
+  extends: [_period_comparison]
 
   dimension: id {
     primary_key: yes
     type: number
 #     hidden: yes
     sql: ${TABLE}.id ;;
+  }
+
+  #### Used with period comparison view
+  dimension_group: event {
+    hidden: yes
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date
+    ]
+    sql: ${order.created_raw} ;;
   }
 
   dimension: fulfillable_quantity {
@@ -255,6 +271,29 @@ view: order_line {
     sql_distinct_key: ${id} ;;
     value_format_name: usd
     sql: ${pre_tax_price}*${quantity} ;;
+  }
+
+  measure: total_price_current_period {
+    group_label: "Period Analysis"
+    type: sum_distinct
+    sql_distinct_key: ${id} ;;
+    value_format_name: usd
+    sql: ${price}*${quantity} ;;
+    filters: [is_current_period: "Yes"]
+  }
+  measure: total_price_comparison_period {
+    group_label: "Period Analysis"
+    type: sum_distinct
+    sql_distinct_key: ${id} ;;
+    value_format_name: usd
+    sql: ${price}*${quantity} ;;
+    filters: [is_comparison_period: "Yes"]
+  }
+  measure: total_price_percent_variation {
+    group_label: "Period Analysis"
+    type: number
+    value_format_name: percent_2
+    sql: (${total_price_current_period}-${total_price_comparison_period})/nullif(${total_price_comparison_period},0) ;;
   }
 
 }
