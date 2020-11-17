@@ -65,7 +65,7 @@ view: _period_comparison {
   }
 
   dimension: comparison_period_start_date {
-    # hidden: yes
+    hidden: yes
     group_label: "Period Comparison"
     type: date
     convert_tz: no
@@ -78,7 +78,7 @@ view: _period_comparison {
   }
 
   dimension: comparison_period_end_date {
-    # hidden: yes
+    hidden: yes
     group_label: "Period Comparison"
     type: date
     convert_tz: no

@@ -23,7 +23,7 @@ view: inventory_level {
 
   dimension: inventory_item_id {
     type: number
-    # hidden: yes
+    hidden: yes
     primary_key: yes
     sql: ${TABLE}.inventory_item_id ;;
   }
