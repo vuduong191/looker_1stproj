@@ -355,10 +355,10 @@ explore: affiliate_performance_us_only {}
 explore: affiliate_performance_us_au_2 {
   join: ga_affiliate_traffic_order_us {
     view_label: "GA Data"
-    relationship: one_to_one
+    relationship: many_to_one
     type: left_outer
     sql_on: ${affiliate_performance_us_au_2.market} = "us" AND
-      ${affiliate_performance_us_au_2.transaction_date} = ${ga_affiliate_traffic_order_us.date_date}
+      ${affiliate_performance_us_au_2.transaction_date} = ${ga_affiliate_traffic_order_us.pk}
       ;;
   }
 }

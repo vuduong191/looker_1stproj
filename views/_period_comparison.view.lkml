@@ -11,6 +11,14 @@ view: _period_comparison {
     type: date
   }
 
+  filter: custom_comparison_filter {
+    group_label: "Period Comparison"
+    label: "Custom Comparison Period Date Filter"
+    description: "Use this date filter in combination with the period dimension to compare this period to previous periods, only if you need a custom comparison period."
+    type: date
+  }
+
+
   parameter: comparison_period {
     group_label: "Period Comparison"
     label: "Comparison Period"
@@ -36,6 +44,10 @@ view: _period_comparison {
       label: "Previous Year"
       value: "year"
     }
+    allowed_value: {
+      label: "Custom"
+      value: "custom"
+    }
   }
 
   dimension_group: filter_start_date {
@@ -56,6 +68,25 @@ view: _period_comparison {
     sql: CASE WHEN {% date_end date_filter %} IS NULL THEN CURRENT_DATE ELSE CAST({% date_end date_filter %} as DATE) END;;
   }
 
+  dimension_group: custom_comparison_filter_start_date {
+    group_label: "Period Comparison"
+    hidden: yes
+    type: time
+    timeframes: [raw,time,date]
+    ## SNOWFLAKE SQL
+    sql: CASE WHEN {% date_start custom_comparison_filter %} IS NULL THEN '1970-01-01' ELSE CAST({% date_start custom_comparison_filter %} as DATE) END;;
+  }
+
+  dimension_group: custom_comparison_filter_end_date {
+    group_label: "Period Comparison"
+    hidden: yes
+    type: time
+    timeframes: [raw,time,date]
+    ## SNOWFLAKE SQL
+    sql: CASE WHEN {% date_end custom_comparison_filter %} IS NULL THEN CURRENT_DATE ELSE CAST({% date_end custom_comparison_filter %} as DATE) END;;
+  }
+
+
   dimension: interval {
     hidden: yes
     group_label: "Period Comparison"
@@ -72,6 +103,8 @@ view: _period_comparison {
     ## SNOWFLAKE SQL
     sql: {% if comparison_period._parameter_value == "previous" %}
           date_add(${filter_start_date_raw}, INTERVAL ${interval} day)
+        {% elsif comparison_period._parameter_value == "custom"  %}
+          ${custom_comparison_filter_start_date_raw}
         {% else %}
           date_add(${filter_start_date_raw}, INTERVAL -1 {% parameter comparison_period %})
         {% endif %} ;;
@@ -85,6 +118,8 @@ view: _period_comparison {
     ## SNOWFLAKE SQL
     sql: {% if comparison_period._parameter_value == "previous" %}
           ${filter_start_date_raw}
+        {% elsif comparison_period._parameter_value == "custom"  %}
+          ${custom_comparison_filter_end_date_raw}
         {% else  %}
           date_add(${filter_end_date_raw}, INTERVAL -1 {% parameter comparison_period %})
         {% endif %} ;;
