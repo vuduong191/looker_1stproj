@@ -19,3 +19,9 @@ constant: inventory_table {
 constant: country_code {
   value: "{% if _model._name == 'au' %}au{% elsif countries.country._parameter_value == 'AU' %}au{% else %}us{% endif  %}"
 }
+constant: au_tz {
+  value: "Australia/Melbourne"
+}
+constant: us_tz {
+  value: "America/Los_Angeles"
+}

@@ -310,6 +310,12 @@ explore: ga_channel_us {
     view_label: "Calculated Metrics"
     relationship: one_to_one
     sql:   ;;
+}}
+explore: ga_channel_au {
+  join: ga_au_channel_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
 }
 }
 explore: bing_daily_us {}

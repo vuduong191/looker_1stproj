@@ -6,7 +6,7 @@
   - name: date
     title: 'Date Range'
     type: date_filter
-    default_value: 2 years
+    default_value: 2 months
 
   - name: date_aggregation
     type: field_filter
