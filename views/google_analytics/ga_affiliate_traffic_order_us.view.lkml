@@ -10,6 +10,12 @@ view: ga_affiliate_traffic_order_us {
       }
     }
   }
+  dimension: pk {
+    type: date
+    hidden: yes
+    primary_key: yes
+    sql: ${TABLE}.date_date ;;
+  }
   dimension_group: date {
     type: time
     timeframes: [date, week, month, year]
