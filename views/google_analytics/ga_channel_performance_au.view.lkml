@@ -1,5 +1,5 @@
 view: ga_channel_performance_au {
-  sql_table_name: `aerobic-datum-283623.google_analytics_au.ga_channel_performance_au`
+  sql_table_name: `aerobic-datum-283623.google_analytics_au2.ga_channel_test_2`
     ;;
 
   dimension: _fivetran_id {
